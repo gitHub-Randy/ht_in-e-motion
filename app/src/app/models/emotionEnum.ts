@@ -1,11 +1,11 @@
 export enum vreugde {
-    gelukkig = "Gelukkig",
-    enthousiast = "Enthousiast",
-    tevreden = " Tevreden",
-    verliefd = "Verliefd",
-    blij = "Blij",
-    zelfverzekerd = "Zelfverzekerd",
-    ontspannen = "Ontspannen"
+    "Gelukkig",
+    "Enthousiast",
+    " Tevreden",
+   "Verliefd",
+    "Blij",
+    "Zelfverzekerd",
+   "Ontspannen"
 
 }
 
@@ -30,13 +30,13 @@ export enum angst {
 }
 
 export enum boos {
-    verbolgen = "Verbolgen",
-    ergeren = "Ergeren",
-    verbitterd = "Verbitterd",
-    geirriteerd = "Geirriteerd",
-    vijandig = "Vijandig",
-    furieus = "Furieus",
-    verontwaardigd = "Verontwaardigd"
+    "Verbolgen",
+    "Ergeren",
+    "Verbitterd",
+    "Geirriteerd",
+    "Vijandig",
+    "Furieus",
+    "Verontwaardigd"
 
 
 }
