@@ -1,7 +1,27 @@
-.content {
-    display: flex;
+.background {
+    z-index: -1;
+    position: absolute;
+
 }
 
-img{
-    z-index: -1;
+.content {
+    display: flex;
+    justify-content: space-between;
 }
+
+.left {
+    margin-left: 5%;
+    margin-top: 10%;
+}
+
+.right {
+    margin-right: 5%;
+    margin-top: 10%;
+}
+
+.center{
+    margin-top: 20%;
+    font-size: 30px;
+    font-weight: 600;
+}
+
