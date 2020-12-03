@@ -8,6 +8,12 @@ import { EmotionSelectionComponent } from './components/emotion-selection/emotio
 import { EmotionStrengthsComponent } from './components/emotion-strengths/emotion-strengths.component';
 import { EmotionDescriptionComponent } from './components/emotion-description/emotion-description.component';
 import { HeaderComponent } from './components/header/header.component';
+import { EmotionChipsComponent } from './components/emotion-chips/emotion-chips.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -16,11 +22,15 @@ import { HeaderComponent } from './components/header/header.component';
     EmotionStrengthsComponent,
     EmotionDescriptionComponent,
     HeaderComponent,
+    EmotionChipsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatChipsModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

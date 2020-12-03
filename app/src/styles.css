@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 html, body{
     font-family: 'Poppins', sans-serif;
+    height: 100%;
 }
-
+html{
+    background-color: rgb(103, 188, 217, .2)
+}
