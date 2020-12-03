@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
-const CategoryArray = ["Vreugde", "Verdriet", "Angst", "Boos", "Verrassing", "Afschuw" ]
+const CategoryArray = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW" ]
 @Component({
   selector: 'app-emotion-selection',
   templateUrl: './emotion-selection.component.html',

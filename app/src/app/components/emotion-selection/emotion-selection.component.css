@@ -1,24 +1,33 @@
 .selection {
     
-    background-color: white;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     width: 95%;
     margin: auto;
     border-radius: 8px;
+    height: 250px;
 }
 
 .categorySelect{
     display: flex;
     margin: auto;
+    margin-bottom: 2px;
+    margin-top: 2px
     
 }
 
 .categoryWord{
     margin: auto;
-}
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;}
 
 .chipDiv{
+  
     background-color: #F7F7F7;
     margin: auto;
+    margin-top: 2px;
+    border-radius: 10px;
+    width: 90%;
+    height: 150px
 }

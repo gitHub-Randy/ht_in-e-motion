@@ -1,59 +1,59 @@
 export enum vreugde {
-    "Gelukkig",
-    "Enthousiast",
-    " Tevreden",
-   "Verliefd",
-    "Blij",
-    "Zelfverzekerd",
-   "Ontspannen"
+    "GELUKKIG",
+    "ENTHOUSIAST",
+    "TEVREDEN",
+    "VERLIEFD",
+    "BLIJ",
+    "ZELFVERZEKERD",
+    "ONTSPANNEN"
 
 }
 
 export enum verdriet {
-    zwaarmoedig = "Zwaarmoedig",
-    zelfmedelijden = "Zelfmedelijden",
-    bedroefd = "Bedroefd",
-    wanhoop = "Wanhopig",
-    eenzaam = "Eenzaam",
-    depresief = "Depressief",
-    rouwend = "Rouwend"
+    "ZWAARMOEDIG",
+    "ZELFMEDELIJDEN",
+    "BEDROEFD",
+    "WANHOPIG",
+    "EENZAM",
+    "DEPRESSIEF",
+    "ROUWEND"
 }
 
 export enum angst {
-    rusteloos = "Rusteloos",
-    fobish = "Fobisch",
-    paniekerig = "Paniekerig",
-    zenuwachtig = "Zenuwachtig",
-    ongerust = "Ongerust",
-    bezorgd = "Bezorgd",
-    wantrouwend = "Wantrouwend"
+    "RUSTELOOS",
+    "FOBISCH",
+    "PANIEKERIG",
+    "ZENUWACHTIG",
+    "ONGERUST",
+    "BEZORGD",
+    "WANTROUWEND"
 }
 
 export enum boos {
-    "Verbolgen",
-    "Ergeren",
-    "Verbitterd",
-    "Geirriteerd",
-    "Vijandig",
-    "Furieus",
-    "Verontwaardigd"
+    "VERBOLGEN",
+    "ERGEREN",
+    "VERBITTERD",
+    "GEIRRITEERD",
+    "VIJANDIG",
+    "FURIEUS",
+    "VERONTWAARDIGD"
 
 
 }
 
-export enum verrassing{
-    gechoqueerd = "Gechoqueerd",
-    verbijsterd = "Verbijsterd",
-    verwonderd = "Verwonderd",
-    overrompeld = "Overrompeld",
-    ontstelt = "Ontstelt",
+export enum verrassing {
+    "GECHIQUEERD",
+    "VERBIJSTERD",
+    "VERWONDERD",
+    "OVERROMPELD",
+    "ONTSTELT",
 
 }
 
 export enum afschuw {
-    minachtend = "Minachtend",
-    aversie = "Aversie",
-    weerzin = "Weerzin",
-    ontzet = "Ontzet",
+    "MINACHTEND",
+    "AVERSIE",
+    "WEERZIN",
+    "ONTZET",
 
 }

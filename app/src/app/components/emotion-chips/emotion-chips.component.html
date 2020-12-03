@@ -1,7 +1,15 @@
-
 <div class="chips">
-    <mat-chip-list aria-label="Fish selection">
-        <mat-chip *ngFor="let emotion of emotionList">{{emotion}}</mat-chip>
-        <mat-chip>ANDERS..</mat-chip>
-      </mat-chip-list>
+
+  <mat-chip-list>
+    <div class="gridContainer" aria-label="emotion selection">
+
+    <mat-chip *ngFor="let emotion of emotionList; index as i" class="gridItem-{{i}}" class="chipListItem"  selectable=true>{{emotion}}</mat-chip>
+
+    <mat-chip class="gridItem-{{emotionList.length}}">ANDERS..</mat-chip>
+  </div>
+
+  </mat-chip-list>
+   
+
+
 </div>

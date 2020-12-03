@@ -28,22 +28,22 @@ export class EmotionChipsComponent implements OnInit {
 
     console.log(category)
     switch (category) {
-      case "Vreugde":
+      case "VREUGDE":
         this.emotionList = this.convertEnumToArray(vreugde)
         break;
-      case "Verdriet":
+      case "VERDRIET":
         this.emotionList = this.convertEnumToArray(verdriet);
         break;
-      case "Angst":
+      case "ANGST":
         this.emotionList =  this.convertEnumToArray(angst);
         break;
-      case "Boos":
+      case "BOOS":
         this.emotionList =  this.convertEnumToArray(boos);
         break;
-      case "Verrassing":
+      case "VERRASSING":
         this.emotionList =  this.convertEnumToArray(verrassing);
         break;
-      case "Afschuw":
+      case "AFSCHUW":
         this.emotionList =  this.convertEnumToArray(afschuw);
         break;
     }
