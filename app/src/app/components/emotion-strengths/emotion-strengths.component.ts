@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { from } from 'rxjs';
 @Component({
   selector: 'app-emotion-strengths',
   templateUrl: './emotion-strengths.component.html',
@@ -10,6 +10,7 @@ export class EmotionStrengthsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
