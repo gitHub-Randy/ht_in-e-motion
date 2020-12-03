@@ -1,0 +1,7 @@
+.content {
+    display: flex;
+}
+
+img{
+    z-index: -1;
+}
