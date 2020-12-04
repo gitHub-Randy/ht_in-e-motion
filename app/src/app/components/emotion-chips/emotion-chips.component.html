@@ -5,11 +5,13 @@
 
     <mat-chip *ngFor="let emotion of emotionList; index as i" class="gridItem-{{i}}" class="chipListItem" [selected]="emotion.state" (click)="emotion.state=!emotion.state;changeSelected(emotion)" >{{emotion.name}}</mat-chip>
 
-    <mat-chip class="gridItem-{{emotionList.length}}">ANDERS..</mat-chip>
+    <mat-chip class="gridItem-{{emotionList.length}}"  (click)="otherEmotion()">ANDERS..</mat-chip>
+   
   </div>
 
   </mat-chip-list>
-   
+</div>
 
-
+<div class="other" *ngIf="!other">
+  Nieuwe DIV
 </div>

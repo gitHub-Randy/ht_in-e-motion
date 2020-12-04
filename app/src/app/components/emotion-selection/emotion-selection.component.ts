@@ -37,4 +37,5 @@ export class EmotionSelectionComponent implements OnInit {
     this.categoryWord = CategoryArray[this.categoryIndex]
   }
 
+  
 }
