@@ -12,11 +12,29 @@ export class EmotionChipsComponent implements OnInit {
   @Input() choosenCategory: string;
   currentCategory= "vreugde";
   emotionList: string[] = []
+  selectedEmotions: string[] = [];
 
   ngOnInit(): void {
     this.currentCategory = this.choosenCategory;
     this.getEmotions(this.currentCategory);
-    console.log(this.emotionList)
+  }
+
+
+  changeSelected(emotion) {
+    console.log("BEFORE: ",this.selectedEmotions)
+    let hasRemoved = false;
+    this.selectedEmotions.forEach((e, i) => {
+      if (emotion == e) {
+        this.selectedEmotions.splice(i, 1);
+        hasRemoved = true;
+      }
+    });
+
+    if (!hasRemoved) {
+      this.selectedEmotions.push(emotion);
+    }
+    console.log("AFTER: ",this.selectedEmotions)
+
   }
 
   ngOnChanges() {
@@ -26,7 +44,6 @@ export class EmotionChipsComponent implements OnInit {
   }
   getEmotions(category: String) {
 
-    console.log(category)
     switch (category) {
       case "VREUGDE":
         this.emotionList = this.convertEnumToArray(vreugde)
@@ -60,7 +77,11 @@ export class EmotionChipsComponent implements OnInit {
     let enumArray = [];
     for (let index in enumObject) {
       if (index.length > 1) {
-        enumArray.push(index);
+        let tempObject = {
+          name: index,
+          state: false
+        }
+        enumArray.push(tempObject);
 
       }
     }

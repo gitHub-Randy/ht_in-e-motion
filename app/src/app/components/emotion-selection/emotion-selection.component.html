@@ -5,13 +5,15 @@
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
         <p class="categoryWord">{{categoryWord}}</p>
-        <button mat-icon-button (click)="onRight()" >
+        <button mat-icon-button (click)="onRight()">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
     </div>
   
     <div class="chipDiv">
         <emotion-chips [choosenCategory]="categoryWord"></emotion-chips>
-
+    </div>
+    <div>
+        <gif-grid></gif-grid>
     </div>
 </div>

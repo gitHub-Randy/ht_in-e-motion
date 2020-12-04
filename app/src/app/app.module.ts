@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { GifGridComponent } from './components/gif-grid/gif-grid.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     EmotionDescriptionComponent,
     HeaderComponent,
     EmotionChipsComponent,
+    GifGridComponent,
   ],
   imports: [
     BrowserModule,

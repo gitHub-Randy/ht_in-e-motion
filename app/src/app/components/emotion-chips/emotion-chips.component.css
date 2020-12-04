@@ -21,18 +21,15 @@
 
 .mat-standard-chip:hover::after{
     background-color: #67BCD9 !important;
-    opacity: 0.6;
-    
+    opacity: 0.2;
+  
+}
 
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary{
+  background-color: #67BCD9 !important;
 
 }
 
-
-
-/* .mat-chip.mat-standard-chip::after {
-  background-color: #67BCD9 !important;
-  color: rgb(0, 255, 21, 1) !important;
-} */
 
 .gridContainer {
     height: 100%;
