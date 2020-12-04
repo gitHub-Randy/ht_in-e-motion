@@ -1,5 +1,14 @@
 <app-header></app-header>
 <div class="selection">
+    <mat-card class="other" *ngIf="!other" >
+        <mat-card-title>Anders...</mat-card-title>
+        <mat-card-content>
+            <input placeholder="beschrijf hier je gevoel">   
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>OK</button>
+        </mat-card-actions>    
+    </mat-card>
     <div class="categorySelect">
         <button mat-icon-button (click)="onLeft()" >
             <mat-icon>keyboard_arrow_left</mat-icon>
@@ -9,11 +18,14 @@
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
     </div>
-  
     <div class="chipDiv">
-        <emotion-chips [choosenCategory]="categoryWord" (selectedEmotion)="showGifs($event)"></emotion-chips>
+       
+        <emotion-chips [choosenCategory]="categoryWord" (selectedEmotion)="showGifs($event)" (selectOther)="showOther($event)"></emotion-chips>
+     
     </div>
+  
     <div>
         <gif-grid [emotionName]="selectedEmotion"></gif-grid>
     </div>
+    
 </div>

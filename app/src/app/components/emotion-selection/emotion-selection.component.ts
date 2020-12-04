@@ -13,6 +13,7 @@ export class EmotionSelectionComponent implements OnInit {
   categoryIndex = 0
 
   selectedEmotion = null;
+  other = null;
 
 
   ngOnInit(): void {
@@ -26,6 +27,11 @@ export class EmotionSelectionComponent implements OnInit {
     console.log(event);
   }
 
+  showOther(event) {
+    console.log("showing")
+    this.other = !this.other;
+    console.log(event);
+  }
 
   onRight() {
     if (this.categoryIndex < 5) {

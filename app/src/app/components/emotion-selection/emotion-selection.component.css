@@ -31,3 +31,17 @@
     width: 90%;
     height: 150px
 }
+
+.other{
+    background-color: #ffffff;
+    width: 86%;
+    border-radius: 8px;
+    height: 125px;
+    position: absolute;
+    z-index: 200;
+  }
+
+mat-card-actions{
+    margin-left: 80%;
+    margin-top: 10%;
+}

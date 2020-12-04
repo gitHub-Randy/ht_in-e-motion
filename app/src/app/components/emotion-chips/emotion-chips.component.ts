@@ -14,13 +14,21 @@ export class EmotionChipsComponent implements OnInit {
   emotionList: string[] = []
   selectedEmotions: string[] = [];
   other: boolean = false;
+  
+  @Output() selectOther = new EventEmitter<boolean>();
 
   @Output() selectedEmotion = new EventEmitter<Object>();
+  
+
   ngOnInit(): void {
     this.currentCategory = this.choosenCategory;
     this.getEmotions(this.currentCategory);
   }
 
+  sendOther(o) {
+    console.log("sending")
+    this.selectOther.emit(o);
+  }
 
   sendEmotionToParent(emotion) {
     this.selectedEmotion.emit(emotion);
@@ -92,6 +100,7 @@ export class EmotionChipsComponent implements OnInit {
 
   otherEmotion() {
     this.other = !this.other;
+    this.sendOther(this.other);
   }
 
 }
