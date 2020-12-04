@@ -31,9 +31,6 @@
   border-radius: 8px;
   height: 250px;
   z-index: 200;
-.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary{
-  background-color: #67BCD9 !important;
-
 }
 
 
