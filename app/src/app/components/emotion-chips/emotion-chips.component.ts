@@ -13,6 +13,7 @@ export class EmotionChipsComponent implements OnInit {
   currentCategory= "vreugde";
   emotionList: string[] = []
   selectedEmotions: string[] = [];
+  other: boolean = false;
 
   @Output() selectedEmotion = new EventEmitter<Object>();
   ngOnInit(): void {
@@ -71,12 +72,7 @@ export class EmotionChipsComponent implements OnInit {
         break;
     }
 
-
-
-
-
   }
-
 
   convertEnumToArray(enumObject: Object) {
     console.log(enumObject)
@@ -92,6 +88,10 @@ export class EmotionChipsComponent implements OnInit {
       }
     }
     return enumArray;
+  }
+
+  otherEmotion() {
+    this.other = !this.other;
   }
 
 }

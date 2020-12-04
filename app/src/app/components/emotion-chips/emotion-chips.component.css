@@ -25,9 +25,12 @@
   
 }
 
-.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary{
-  background-color: #67BCD9 !important;
-
+.other{
+  background-color: red;
+  width: 95%;
+  border-radius: 8px;
+  height: 250px;
+  z-index: 200;
 }
 
 
