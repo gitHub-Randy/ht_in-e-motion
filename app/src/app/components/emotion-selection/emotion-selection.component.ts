@@ -11,10 +11,19 @@ export class EmotionSelectionComponent implements OnInit {
   constructor() { }
   categoryWord: String;
   categoryIndex = 0
+
+  selectedEmotion = null;
+
+
   ngOnInit(): void {
     this.categoryWord = CategoryArray[this.categoryIndex];
     console.log(this.categoryWord)
 
+  }
+
+  showGifs(event) {
+    this.selectedEmotion = event.name
+    console.log(event);
   }
 
 

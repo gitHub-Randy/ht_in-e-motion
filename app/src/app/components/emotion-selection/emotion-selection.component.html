@@ -11,9 +11,10 @@
     </div>
   
     <div class="chipDiv">
-        <emotion-chips [choosenCategory]="categoryWord"></emotion-chips>
+        <emotion-chips [choosenCategory]="categoryWord" (selectedEmotion)="showGifs($event)"></emotion-chips>
     </div>
     <div>
+        {{selectedEmotion}}
         <gif-grid></gif-grid>
     </div>
 </div>

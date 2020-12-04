@@ -1,4 +1,4 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, Output,EventEmitter} from '@angular/core';
 import '../../models/emotionEnum'
 import { afschuw, angst, boos, verdriet, verrassing, vreugde } from '../../models/emotionEnum';
 @Component({
@@ -14,11 +14,16 @@ export class EmotionChipsComponent implements OnInit {
   emotionList: string[] = []
   selectedEmotions: string[] = [];
 
+  @Output() selectedEmotion = new EventEmitter<Object>();
   ngOnInit(): void {
     this.currentCategory = this.choosenCategory;
     this.getEmotions(this.currentCategory);
   }
 
+
+  sendEmotionToParent(emotion) {
+    this.selectedEmotion.emit(emotion);
+  }
 
   changeSelected(emotion) {
     console.log("BEFORE: ",this.selectedEmotions)
@@ -32,6 +37,7 @@ export class EmotionChipsComponent implements OnInit {
 
     if (!hasRemoved) {
       this.selectedEmotions.push(emotion);
+      this.sendEmotionToParent(emotion);
     }
     console.log("AFTER: ",this.selectedEmotions)
 
