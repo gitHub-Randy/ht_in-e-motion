@@ -14,7 +14,6 @@
         <emotion-chips [choosenCategory]="categoryWord" (selectedEmotion)="showGifs($event)"></emotion-chips>
     </div>
     <div>
-        {{selectedEmotion}}
-        <gif-grid></gif-grid>
+        <gif-grid [emotionName]="selectedEmotion"></gif-grid>
     </div>
 </div>
