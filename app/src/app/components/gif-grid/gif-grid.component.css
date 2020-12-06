@@ -1,0 +1,146 @@
+.scrollContainer{
+    height: 173px;
+    margin-top: 4px;
+}
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+    
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 40px;
+    width: 5px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, .5);
+  }
+.gifGrid {
+    height: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-rows: 77px 77px 77px 77px;
+    grid-template-columns: 30px  98px;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    gap: 10px 2px;
+ 
+}
+
+#gif-0 {
+    width: 145px;
+    height: 80px;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  display: flex;
+  justify-content: center;
+  
+}
+
+#gif-1 {
+    width: 145px;
+    height: 80px;
+    border-radius: 10px;
+
+  border: 2px solid rgb(255, 255, 255);
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  display: flex;
+  justify-content: center;
+ 
+}
+
+#gif-2 {
+    width: 145px;
+    height: 80px;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  display: flex;
+  justify-content: center;
+ 
+}
+
+#gif-3 {
+    width: 145px;
+    height: 80px;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  display: flex;
+  justify-content: center;
+  
+}
+
+#gif-4 {
+    width: 145px;
+    height: 80px;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 3;
+  display: flex;
+  justify-content: center;
+ 
+}
+
+#gif-5 {
+    width: 145px;
+    height: 80px;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 3;
+  display: flex;
+  justify-content: center;
+ 
+}
+
+#gif-6 {
+    width: 145px;
+    height: 80px;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 4;
+  grid-row-end: 4;
+  display: flex;
+  justify-content: center;
+  
+}
+
+#gif-7 {
+    width: 145px;
+    height: 80px;
+    border-radius: 10px;
+    border-style: solid;
+    border: 2px solid rgb(255, 255, 255);
+
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 4;
+  display: flex;
+  justify-content: center;
+ 
+}

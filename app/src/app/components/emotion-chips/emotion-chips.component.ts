@@ -1,4 +1,4 @@
-import { Component, OnInit , Input, Output,EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, AfterViewChecked } from '@angular/core';
 import '../../models/emotionEnum'
 import { afschuw, angst, boos, verdriet, verrassing, vreugde } from '../../models/emotionEnum';
 @Component({
@@ -6,36 +6,39 @@ import { afschuw, angst, boos, verdriet, verrassing, vreugde } from '../../model
   templateUrl: './emotion-chips.component.html',
   styleUrls: ['./emotion-chips.component.css']
 })
-export class EmotionChipsComponent implements OnInit {
+export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecked {
 
   constructor() { }
   @Input() choosenCategory: string;
-  currentCategory= "vreugde";
+
+  @Input() chosenEmotions: [];
+
+  currentCategory = "vreugde";
   emotionList: string[] = []
   selectedEmotions: string[] = [];
   other: boolean = false;
-  
+
   @Output() selectOther = new EventEmitter<boolean>();
 
   @Output() selectedEmotion = new EventEmitter<Object>();
-  
+
 
   ngOnInit(): void {
     this.currentCategory = this.choosenCategory;
     this.getEmotions(this.currentCategory);
+    console.log("yeet")
   }
 
   sendOther(o) {
-    console.log("sending")
     this.selectOther.emit(o);
   }
 
   sendEmotionToParent(emotion) {
+    console.log("sending emotion")
     this.selectedEmotion.emit(emotion);
   }
 
   changeSelected(emotion) {
-    console.log("BEFORE: ",this.selectedEmotions)
     let hasRemoved = false;
     this.selectedEmotions.forEach((e, i) => {
       if (emotion == e) {
@@ -48,42 +51,70 @@ export class EmotionChipsComponent implements OnInit {
       this.selectedEmotions.push(emotion);
       this.sendEmotionToParent(emotion);
     }
-    console.log("AFTER: ",this.selectedEmotions)
+
+  }
+
+  ngAfterViewChecked() {
+    this.preChangeState()
 
   }
 
   ngOnChanges() {
+   
     this.currentCategory = this.choosenCategory;
-
     this.getEmotions(this.currentCategory);
   }
   getEmotions(category: String) {
 
     switch (category) {
       case "VREUGDE":
-        this.emotionList = this.convertEnumToArray(vreugde)
+        this.emotionList = this.convertEnumToArray(vreugde);
+        this.preChangeState();
         break;
       case "VERDRIET":
         this.emotionList = this.convertEnumToArray(verdriet);
+        this.preChangeState();
+
         break;
       case "ANGST":
-        this.emotionList =  this.convertEnumToArray(angst);
+        this.emotionList = this.convertEnumToArray(angst);
+        this.preChangeState();
+
         break;
       case "BOOS":
-        this.emotionList =  this.convertEnumToArray(boos);
+        this.emotionList = this.convertEnumToArray(boos);
+        this.preChangeState();
+
         break;
       case "VERRASSING":
-        this.emotionList =  this.convertEnumToArray(verrassing);
+        this.emotionList = this.convertEnumToArray(verrassing);
+        this.preChangeState();
+
         break;
       case "AFSCHUW":
-        this.emotionList =  this.convertEnumToArray(afschuw);
+        this.emotionList = this.convertEnumToArray(afschuw);
+        this.preChangeState();
+
         break;
     }
 
   }
 
+  preChangeState() {
+    console.log(this.selectedEmotions)
+    this.emotionList.forEach((emotion,index) => {
+      this.chosenEmotions.forEach(chosenEmote => {
+        if (emotion.name == chosenEmote.emotionName) {
+          emotion.state = true;
+
+
+        }
+      })
+    })
+  }
+
+
   convertEnumToArray(enumObject: Object) {
-    console.log(enumObject)
     let enumArray = [];
     for (let index in enumObject) {
       if (index.length > 1) {

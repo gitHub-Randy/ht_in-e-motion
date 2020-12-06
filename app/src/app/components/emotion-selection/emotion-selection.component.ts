@@ -13,24 +13,39 @@ export class EmotionSelectionComponent implements OnInit {
   categoryIndex = 0
 
   selectedEmotion = null;
-  other = null;
+  other = false;
+  selectionComplete = false
 
+  chosenEmotions = [];
 
   ngOnInit(): void {
     this.categoryWord = CategoryArray[this.categoryIndex];
-    console.log(this.categoryWord)
+  }
 
+
+  updateChosenData(event) {
+    this.chosenEmotions = event;
+    if (this.chosenEmotions.length != 0) {
+      this.selectionComplete = true;
+
+    } else {
+      this.selectionComplete = false;
+    }
   }
 
   showGifs(event) {
-    this.selectedEmotion = event.name
-    console.log(event);
+    console.log("SETTING EMOTION NAME")
+    if (event != null) {
+      this.selectedEmotion = event.name
+
+    } else {
+      this.selectedEmotion = null;
+    }
   }
 
   showOther(event) {
     console.log("showing")
     this.other = !this.other;
-    console.log(event);
   }
 
   onRight() {
@@ -40,8 +55,25 @@ export class EmotionSelectionComponent implements OnInit {
       this.categoryIndex = 0;
     }
     this.categoryWord = CategoryArray[this.categoryIndex]
+    this.refreshGifs();
   }
 
+
+  refreshGifs() {
+    
+    if (this.chosenEmotions.length > 0) {
+      let preSelectedEmotion = null;
+      this.chosenEmotions.forEach(emotion => {
+        if (this.categoryWord == emotion.emotionCategory) {
+          preSelectedEmotion = {
+            name: emotion.emotionName
+          }
+        }
+      })
+      this.showGifs(preSelectedEmotion)
+
+    } 
+  }
 
   onLeft() {
     if (this.categoryIndex > 0) {
@@ -50,7 +82,12 @@ export class EmotionSelectionComponent implements OnInit {
       this.categoryIndex = 5;
     }
     this.categoryWord = CategoryArray[this.categoryIndex]
+    this.refreshGifs();
+
   }
+
+
+
 
   
 }

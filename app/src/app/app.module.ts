@@ -17,6 +17,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { GifGridComponent } from './components/gif-grid/gif-grid.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { GifGridComponent } from './components/gif-grid/gif-grid.component';
     MatButtonModule,
     MatGridListModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,11 @@
-<p>{{emotionName}}</p>			
-<img id="gif" #image class="img-fluid" [src]="gifSRC"  alt="Card image cap">
+<cdk-virtual-scroll-viewport itemSize="77" class="scrollContainer" *ngIf="emotionName != null">
+    <div class="gifGrid">
+        <img #image class="img-fluid" id="gif-{{i}}" *ngFor="let src of gifSources;index as i;" src={{src}}
+            alt="Card image cap" (click)="selectedGif($event)">
+    </div>
+</cdk-virtual-scroll-viewport>
+
+
+
+
 

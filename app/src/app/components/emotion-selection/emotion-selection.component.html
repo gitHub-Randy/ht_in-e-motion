@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="selection">
-    <mat-card class="other" *ngIf="!other" >
+    <mat-card class="other" *ngIf="other" >
         <mat-card-title>Anders...</mat-card-title>
         <mat-card-content>
             <input placeholder="beschrijf hier je gevoel">   
@@ -20,12 +20,15 @@
     </div>
     <div class="chipDiv">
        
-        <emotion-chips [choosenCategory]="categoryWord" (selectedEmotion)="showGifs($event)" (selectOther)="showOther($event)"></emotion-chips>
+        <emotion-chips [choosenCategory]="categoryWord" (selectedEmotion)="showGifs($event)" [chosenEmotions]="chosenEmotions" (selectOther)="showOther($event)"></emotion-chips>
      
     </div>
   
     <div>
-        <gif-grid [emotionName]="selectedEmotion"></gif-grid>
+        <gif-grid [emotionName]="selectedEmotion" [emotionCategory]="categoryWord" (chosenEmotionsChanged)="updateChosenData($event)"></gif-grid>
     </div>
     
+
+
+    <button *ngIf="selectionComplete">next</button>
 </div>
