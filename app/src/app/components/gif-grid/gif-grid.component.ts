@@ -1,6 +1,7 @@
 import {  AfterViewChecked, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { element } from 'protractor';
 import { GifServiceService } from 'src/app/gif-service.service';
+import { gifElement } from 'src/app/interfaces/gifElement';
 
 @Component({
   selector: 'gif-grid',
@@ -31,7 +32,7 @@ export class GifGridComponent implements OnInit, OnChanges,AfterViewChecked {
     let newEmotionObject = {
       emotionCategory: this.emotionCategory,
       emotionName: this.emotionName,
-      gif: newGif.src,
+      gif: newGif.getAttribute("src"),
       elementId: newGif.id
     }
 
@@ -48,7 +49,7 @@ export class GifGridComponent implements OnInit, OnChanges,AfterViewChecked {
         } else {
           oldgif.style.border = "2px solid rgb(255, 255, 255)";
           newGif.style.border = "2px solid #2B4D59";
-          emotion.gif = newGif.src;
+          emotion.gif = newGif.getAttribute("src");
           emotion.elementId = newGif.id;
           replacedGif = true;
         }
@@ -61,14 +62,12 @@ export class GifGridComponent implements OnInit, OnChanges,AfterViewChecked {
       newGif.style.border = "2px solid #2B4D59";
 
     }
-    console.log(this.chosenEmotion)
     this.chosenEmotionsChanged.emit(this.chosenEmotion);
   }
 
 
   // every time when the user switches the main-emotion the sub emotions needs to realod
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.emotionName);
     this.gifSources = [];
     this.gifService.getGifs(this.emotionName).subscribe(data => {
       this.gifServiceData = data.results;

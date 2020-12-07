@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, AfterViewChecked } from '@angular/core';
+import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
+import { emotionList } from 'src/app/interfaces/emotionList';
 import '../../models/emotionEnum'
 import { afschuw, angst, boos, verdriet, verrassing, vreugde } from '../../models/emotionEnum';
 @Component({
@@ -11,10 +13,10 @@ export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecke
   constructor() { }
   @Input() choosenCategory: string;
 
-  @Input() chosenEmotions: [];
+  @Input() chosenEmotions: choosenEmotions[];
 
   currentCategory = "vreugde";
-  emotionList: string[] = []
+  emotionList: emotionList[] = []
   selectedEmotions: string[] = [];
   other: boolean = false;
 
@@ -26,7 +28,6 @@ export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecke
   ngOnInit(): void {
     this.currentCategory = this.choosenCategory;
     this.getEmotions(this.currentCategory);
-    console.log("yeet")
   }
 
   sendOther(o) {
@@ -34,11 +35,11 @@ export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecke
   }
 
   sendEmotionToParent(emotion) {
-    console.log("sending emotion")
     this.selectedEmotion.emit(emotion);
   }
 
   changeSelected(emotion) {
+    console.log(this.chosenEmotions)
     let hasRemoved = false;
     this.selectedEmotions.forEach((e, i) => {
       if (emotion == e) {
@@ -99,9 +100,7 @@ export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecke
     }
 
   }
-
   preChangeState() {
-    console.log(this.selectedEmotions)
     this.emotionList.forEach((emotion,index) => {
       this.chosenEmotions.forEach(chosenEmote => {
         if (emotion.name == chosenEmote.emotionName) {

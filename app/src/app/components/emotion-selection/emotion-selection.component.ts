@@ -34,7 +34,6 @@ export class EmotionSelectionComponent implements OnInit {
   }
 
   showGifs(event) {
-    console.log("SETTING EMOTION NAME")
     if (event != null) {
       this.selectedEmotion = event.name
 
@@ -44,7 +43,6 @@ export class EmotionSelectionComponent implements OnInit {
   }
 
   showOther(event) {
-    console.log("showing")
     this.other = !this.other;
   }
 
