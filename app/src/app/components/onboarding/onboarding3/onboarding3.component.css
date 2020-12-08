@@ -1,3 +1,7 @@
 body{
-    background-color:#FBE2E4
+    background-color:#FBE2E4;
+}
+
+.content{
+    text-align: center;
 }

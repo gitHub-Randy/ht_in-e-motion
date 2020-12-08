@@ -4,15 +4,25 @@ body{
     position: absolute;
 }
 
+.header{
+    z-index: -1;
+    position: absolute;
+}
+
+.headercontent{
+    text-align: center;
+}
+
+
 
 .content{
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    margin-top: 45%;
 }
 
 .health{
-    margin-top: 2%;
-    margin-bottom: 15%;
+    margin-top: 4%;
+    margin-bottom: 10%;
 }
