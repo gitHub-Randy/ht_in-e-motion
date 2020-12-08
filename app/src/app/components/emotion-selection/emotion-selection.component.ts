@@ -9,6 +9,7 @@ import { HeaderComponent } from '../header/header.component';
 import { chipState } from '../../interfaces/chipStates'
 import { GifServiceService } from 'src/app/gif-service.service';
 import { element } from 'protractor';
+import { debugPort } from 'process';
 const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW"]
 
 @Component({
@@ -40,65 +41,32 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
 
   initGifs() {
-
-console.log("yeet")
     this.chosenEmotions.forEach(emotion => {
       if (this.currentChip.emotionName == emotion.emotionName) {
         let gifImageId = emotion.index;
-        for (let i = 0; i < this.gifSources.length; i++) {
-          let gifToGrayOut = document.getElementById(`gif-${i}`)
-          console.log(gifToGrayOut)
-          if (i != emotion.index) {
-            gifToGrayOut.style.filter = "opacity(20%)"
-          } else {
-            gifToGrayOut.style.filter = "opacity(100%)"
-          }
-        }
+        let test = document.getElementById(`gif-${emotion.index}`)
+        this.greyOutNotSelectedGifs(test);
       }
-    
     })
 
-
-    // let gifImageId = parseInt(gifImageElement.id.charAt(4));
-    // for (let i = 0; i < this.gifSources.length; i++) {
-    //   if (gifImageId != i) {
-    //     let gifToGrayOut = document.getElementById(`gif-${i}`)
-    //     gifToGrayOut.style.filter = "opacity(20%)"
-    //   } else {
-    //     gifImageElement.style.filter = "opacity(100%)"
-    //   }
-    // }
-
-
-
-
-
-    // for (let i = 0; i < this.gifSources.length; i++) {
-    //   let tempGifObject = document.getElementById(`gif-${i}`);
-    //   this.chosenEmotions.forEach(element => {
-    //     console.log("element: ", element.gif)
-    //     console.log("temp: ",tempGifObject.getAttribute("src"))
-
-    //     if (element.gif == tempGifObject.getAttribute("src")) {
-    //       this.greyOutNotSelectedGifs(tempGifObject)
-    //     }
-    //   })
-    // }
   }
 
 
   initChips() {
-    console.log(this.chosenEmotions);
+    console.log("NEW : ",this.currentChip)
+
     let lastEmotion = null;
     this.chipData.forEach(data => {
       this.chosenEmotions.forEach(emotion => {
 
         if (emotion.emotionName == data.emotionName) {
-          let emotionElementToInit = document.getElementById(data.emotionName);
+          console.log("OLD : ",this.currentChip)
           this.currentChip = {
             emotionName: data.emotionName,
             chipState: true
           }
+          console.log("NEW : ",this.currentChip)
+
           this.makeChipSelected();
           lastEmotion = data.emotionName;
 
@@ -106,13 +74,13 @@ console.log("yeet")
       })
     })
     if (lastEmotion != null) {
-      console.log(lastEmotion)
 
       this.showGifs(lastEmotion);
     } else {
       this.hideGifs();
 
     }
+
   }
 
 
@@ -130,10 +98,7 @@ console.log("yeet")
 
     let currentChip = document.getElementById(event.target.id);
     this.selectedEmotion(currentChip);
-    // currentChip.style.backgroundColor = "#ffffff";
-    // currentChip.style.color = "#000000";
-    // currentChip.style.border = "2px solid #67BCD9"
-    // this.makeChipPreselected(currentChip);
+ 
 
 
   }
@@ -182,14 +147,19 @@ console.log("yeet")
     return currentChipIsInCurrentChipSet;
   }
   selectedEmotion(chip: any) {
+    
     let emotionChip: HTMLElement = chip;
     if (!this.checkIfSelectedEmotionIsNew(emotionChip)) {
       this.makeChipPreselected(emotionChip)
     } else {
-      console.log("old")
       this.makeOldChipNotPreselected();
     }
+
+
+    this.currentChip.emotionName = emotionChip.id
     this.showGifs(emotionChip.id)
+   
+
 
   }
 
@@ -197,9 +167,18 @@ console.log("yeet")
   // changes chosenEmotions with gif url
   //changes chip color
   selectGif(event: any) {
+
     if (this.checkIfSelectedGifAlreadyChosen(event)) {
-      // remove emotion from choosen
-      // preselect current chip
+      let newGifforOldEmotion = document.getElementById(event.id);
+      this.chosenEmotions.forEach(emotion => {
+        if (emotion.gif == newGifforOldEmotion.getAttribute("src")) {
+          emotion.gif = newGifforOldEmotion.getAttribute("src");
+          this.greyOutNotSelectedGifs(newGifforOldEmotion);
+          this.makeChipSelected();
+
+        }
+      })
+    
     } else {
       this.greyOutNotSelectedGifs(event)
       this.addToChosenGifs(event)
@@ -228,6 +207,7 @@ console.log("yeet")
     this.chosenEmotions.forEach(emotion => {
       if (this.currentChip.emotionName == emotion.emotionName) {
         emotion.gif = gifURL
+        emotion.index = parseInt(gifImageElement.id.charAt(4));
         updatedChosenEmotion = true;
       }
     })
@@ -245,6 +225,7 @@ console.log("yeet")
 
 
   makeChipSelected() {
+
     let chip = document.getElementById(this.currentChip.emotionName);
     chip.style.border = "0px solid #ffffff";
     chip.style.backgroundColor = "#2B4D59";
@@ -254,6 +235,7 @@ console.log("yeet")
         data.chipState = true
       }
     })
+
   }
 
 
@@ -278,7 +260,6 @@ console.log("yeet")
         this.gifSources.push(gifData.media[0].nanogif.url);
       });
     }).then(() => {
-      console.log("finished")
       this.ref.detectChanges();
       this.initGifs();
     })
@@ -301,7 +282,6 @@ console.log("yeet")
     this.shouldShowGifs = true;
 
     this.getGifs(emotionName);
-    console.log(this.shouldShowGifs)
 
   }
 
@@ -309,9 +289,7 @@ console.log("yeet")
     this.shouldShowGifs = false;
   }
 
-  preSelectEmotionChip() {
 
-  }
 
 
   // makes the currentCategory.possibleCategroyIndex the next index of POSSIBLE_CATEGORYS; 
@@ -327,7 +305,6 @@ console.log("yeet")
     }
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
-    this.initChips();
   }
 
   // makes the currentCategory.possibleCategroyIndex the previeous index of POSSIBLE_CATEGORYS; 
@@ -342,7 +319,6 @@ console.log("yeet")
     }
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
-    this.initChips();
 
 
 
@@ -374,7 +350,8 @@ console.log("yeet")
         break;
     }
     this.ref.detectChanges();
-    console.log(this.chipData)
+    this.initChips();
+
 
   }
 
@@ -386,7 +363,7 @@ console.log("yeet")
       if (eObj.length > 1) {
         let tempObject = {
           emotionName: eObj,
-          state: false
+          chipState: false
         }
         emotionArray.push(tempObject);
       }
