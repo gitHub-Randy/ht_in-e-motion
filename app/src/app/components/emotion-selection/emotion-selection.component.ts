@@ -28,6 +28,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   other = false;
   selectionComplete = false
   currentChip: chipData;
+  currentEmotion: String;
 
   ngOnInit(): void {
     this.currentCategory = {
@@ -42,7 +43,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   initGifs() {
     this.chosenEmotions.forEach(emotion => {
-      if (this.currentChip.emotionName == emotion.emotionName) {
+      if (this.currentEmotion == emotion.emotionName) {
         let gifImageId = emotion.index;
         let test = document.getElementById(`gif-${emotion.index}`)
         this.greyOutNotSelectedGifs(test);
@@ -53,19 +54,16 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
 
   initChips() {
-    console.log("NEW : ",this.currentChip)
 
     let lastEmotion = null;
     this.chipData.forEach(data => {
       this.chosenEmotions.forEach(emotion => {
 
         if (emotion.emotionName == data.emotionName) {
-          console.log("OLD : ",this.currentChip)
           this.currentChip = {
             emotionName: data.emotionName,
             chipState: true
           }
-          console.log("NEW : ",this.currentChip)
 
           this.makeChipSelected();
           lastEmotion = data.emotionName;
@@ -156,7 +154,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     }
 
 
-    this.currentChip.emotionName = emotionChip.id
+    this.currentEmotion = emotionChip.id
     this.showGifs(emotionChip.id)
    
 
@@ -276,7 +274,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.initGifs();
+    // this.initGifs();
   }
   showGifs(emotionName: string) {
     this.shouldShowGifs = true;
