@@ -13,7 +13,7 @@
             <input placeholder="beschrijf hier je gevoel">
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button>OK</button>
+            <button mat-button (click)="otherEmotion()">OK</button>
         </mat-card-actions>
     </mat-card>
 
@@ -41,7 +41,7 @@
         </mat-chip-list>
     </div>
 
-    <div class="gifDiv">
+    <div class="gifs">
         <div *ngIf="shouldShowGifs">
             <cdk-virtual-scroll-viewport itemSize="77" class="scrollContainer">
                 <div class="gifGrid">

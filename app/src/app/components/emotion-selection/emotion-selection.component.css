@@ -64,7 +64,41 @@ mat-card-actions{
     margin-top: 10%;
 }
 
+.gifs{
+  margin-top: 5%;
+}
 
+.bottom-bar{
+  display: grid;
+  justify-content: space-between;
+  margin: 10% 10% auto 10%;
+}
+
+.prev{
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.prevButton{
+  background-color: #ffffff;
+
+}
+
+.next{
+  display: grid;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.nextButton{
+  background-color: #67BCD9;
+ 
+}
 
 
 
