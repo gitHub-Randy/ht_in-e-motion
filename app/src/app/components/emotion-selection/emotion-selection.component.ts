@@ -98,6 +98,9 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     this.selectedEmotion(currentChip);
  
 
+    if (this.chosenEmotions.length == 0) {
+      this.selectionComplete = false;
+    }
 
   }
 
@@ -217,6 +220,8 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
         index: parseInt(gifImageElement.id.charAt(4))
       })
     }
+
+    this.selectionComplete = true;
 
 
   }
