@@ -1,6 +1,6 @@
 import { AfterContentInit, AfterViewChecked, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { category } from '../../interfaces/category';
-import { chipData } from 'src/app/interfaces/chipData';
+import { chipData } from '../../interfaces/chipData';
 import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
 import { afschuw, angst, boos, verdriet, verrassing, vreugde } from 'src/app/models/emotionEnum';
 import { HeaderComponent } from '../header/header.component';
