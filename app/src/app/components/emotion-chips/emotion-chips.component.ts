@@ -38,25 +38,54 @@ export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecke
     this.selectedEmotion.emit(emotion);
   }
 
-  changeSelected(emotion) {
-    console.log(this.chosenEmotions)
-    let hasRemoved = false;
-    this.selectedEmotions.forEach((e, i) => {
-      if (emotion == e) {
-        this.selectedEmotions.splice(i, 1);
-        hasRemoved = true;
+  SelectEmotion(emotion) {
+    console.log(emotion)
+    // if gif already choosen
+    this.chosenEmotions.forEach(emote => {
+      if (emotion.name == emote.emotionName) {
+        
       }
-    });
-
-    if (!hasRemoved) {
-      this.selectedEmotions.push(emotion);
-      this.sendEmotionToParent(emotion);
-    }
-
+    })
+    
   }
 
+
+
+  // check if chip has chosen gif; if yes dont deselect
+  // changeSelected(emotion) {
+  //       console.log("list: " ,this.chosenEmotions)
+  //   console.log("emotion: " ,emotion)
+  //   let hasChosenEmotion = false;
+  //   this.chosenEmotions.forEach(chosenEmotion => {
+  //     if (emotion.name == chosenEmotion.emotionName) {
+  //       hasChosenEmotion = true;
+  //     }
+  //   })
+  //   if (hasChosenEmotion) {
+  //     this.selectedEmotions.push(emotion);
+  //     this.sendEmotionToParent(emotion);
+  //   }
+
+  //   // let hasRemoved = false;
+  //   // this.selectedEmotions.forEach((e, i) => {
+  //   //   if (emotion == e) {
+  //   //     this.selectedEmotions.splice(i, 1);
+  //   //     hasRemoved = true;
+  //   //     console.log("removing selected emotion")
+  //   //   }
+  //   // });
+
+  //   // if (!hasRemoved) {
+  //   //   console.log("adding selected emotion")
+
+  //   //   this.selectedEmotions.push(emotion);
+  //   //   this.sendEmotionToParent(emotion);
+  //   // }
+
+  // }
+
   ngAfterViewChecked() {
-    this.preChangeState()
+    // this.preChangeState()
 
   }
 
@@ -70,31 +99,31 @@ export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecke
     switch (category) {
       case "VREUGDE":
         this.emotionList = this.convertEnumToArray(vreugde);
-        this.preChangeState();
+        // this.preChangeState();
         break;
       case "VERDRIET":
         this.emotionList = this.convertEnumToArray(verdriet);
-        this.preChangeState();
+        // this.preChangeState();
 
         break;
       case "ANGST":
         this.emotionList = this.convertEnumToArray(angst);
-        this.preChangeState();
+        // this.preChangeState();
 
         break;
       case "BOOS":
         this.emotionList = this.convertEnumToArray(boos);
-        this.preChangeState();
+        // this.preChangeState();
 
         break;
       case "VERRASSING":
         this.emotionList = this.convertEnumToArray(verrassing);
-        this.preChangeState();
+        // this.preChangeState();
 
         break;
       case "AFSCHUW":
         this.emotionList = this.convertEnumToArray(afschuw);
-        this.preChangeState();
+        // this.preChangeState();
 
         break;
     }
@@ -104,7 +133,7 @@ export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecke
     this.emotionList.forEach((emotion,index) => {
       this.chosenEmotions.forEach(chosenEmote => {
         if (emotion.name == chosenEmote.emotionName) {
-          emotion.state = true;
+          // emotion.state = true;
 
 
         }
@@ -119,7 +148,7 @@ export class EmotionChipsComponent implements OnInit, OnChanges, AfterViewChecke
       if (index.length > 1) {
         let tempObject = {
           name: index,
-          state: false
+          state: "none"
         }
         enumArray.push(tempObject);
 

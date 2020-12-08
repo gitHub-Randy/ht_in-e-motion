@@ -1,7 +1,6 @@
 import {  AfterViewChecked, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { element } from 'protractor';
 import { GifServiceService } from 'src/app/gif-service.service';
-import { gifElement } from 'src/app/interfaces/gifElement';
 
 @Component({
   selector: 'gif-grid',
