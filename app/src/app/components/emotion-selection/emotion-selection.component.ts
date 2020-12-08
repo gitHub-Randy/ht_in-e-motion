@@ -1,15 +1,10 @@
 import { AfterContentInit, AfterViewChecked, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { MatChip } from '@angular/material/chips';
 import { category } from 'src/app/interfaces/category';
 import { chipData } from 'src/app/interfaces/chipData';
 import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
-import { emotionList } from 'src/app/interfaces/emotionList';
 import { afschuw, angst, boos, verdriet, verrassing, vreugde } from 'src/app/models/emotionEnum';
 import { HeaderComponent } from '../header/header.component';
-import { chipState } from '../../interfaces/chipStates'
 import { GifServiceService } from 'src/app/gif-service.service';
-import { element } from 'protractor';
-import { debugPort } from 'process';
 const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW"]
 
 @Component({
@@ -266,16 +261,6 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
       this.ref.detectChanges();
       this.initGifs();
     })
-      
-    
-    // this.gifService.getGifs(emotionName).subscribe(data => {
-    //   let gifServiceData = data.results;
-    //   gifServiceData.forEach(gifData => {
-    //     this.gifSources.push(gifData.media[0].nanogif.url);
-    //   });
-
-    // })
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -322,11 +307,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     }
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
-
-
-
   }
-
 
 
   // checks the current categoryName and filss the chipData with corresponding emotions
@@ -354,8 +335,6 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     }
     this.ref.detectChanges();
     this.initChips();
-
-
   }
 
 
@@ -373,7 +352,6 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     }
     return emotionArray;
   }
-
   showOther(event) {
     this.other = !this.other;
   }
@@ -381,53 +359,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   otherEmotion() {
     this.other = !this.other;
-    // this.sendOther(this.other);
   }
 
-  // updateChosenData(event) {
-  //   this.chosenEmotions = event;
-  //   if (this.chosenEmotions.length != 0) {
-  //     this.selectionComplete = true;
-
-  //   } else {
-  //     this.selectionComplete = false;
-  //   }
-  // }
-
-  // showGifs(event) {
-  //   console.log(event)
-  //   if (event != null) {
-  //     this.selectedEmotion = event.name
-
-  //   } else {
-  //     this.selectedEmotion = null;
-  //   }
-  // }
-
-
-
-
-
-  // refreshGifs() {
-
-  //   if (this.chosenEmotions.length > 0) {
-  //     let preSelectedEmotion = null;
-  //     this.chosenEmotions.forEach(emotion => {
-  //       if (this.categoryWord == emotion.emotionCategory) {
-  //         preSelectedEmotion = {
-  //           name: emotion.emotionName
-  //         }
-  //       }
-  //     })
-  //     this.showGifs(preSelectedEmotion)
-
-  //   } 
-  // }
-
-
-
-
-
-
-
+ 
 }
