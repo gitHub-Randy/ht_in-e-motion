@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-onboarding1',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Onboarding1Component implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 
+  nextpage(){
+    this.router.navigateByUrl('onboarding/2');
+  }
+
+  prevpage(){
+    this.router.navigateByUrl('onboarding');
+  }
 }
