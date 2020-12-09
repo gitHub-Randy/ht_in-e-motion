@@ -3,57 +3,58 @@
 </div>
 
 <div class="content">
-    <div class="left" >
+    <div class="left">
         <mat-sidenav-container class="sidenav-container">
-            <mat-sidenav #drawer class="sidenav" fixedInViewport=true
-                [mode]="'over'" [opened]="menuState">
+            <mat-sidenav #drawer class="sidenav" fixedInViewport=true [mode]="'over'" [opened]="true">
                 <!-- <mat-toolbar>Menu</mat-toolbar> -->
                 <mat-nav-list>
                     <div class="menuTitle">
                         <p>MENU</p>
                         <img id="logo" src="../../../assets/Group 38.png" alt="menuButton">
                         <button class="closeButton" (click)="drawer.toggle()">
-                          
-                            <mat-icon  id="closeIcon">close</mat-icon>
+
+                            <mat-icon id="closeIcon">close</mat-icon>
                         </button>
 
                     </div>
                     <div class="link">
                         <a mat-list-item href="#">HOE VOEL JE JE?</a>
-                        <img id="arrowRight"  src="../../../assets/arrow_right.png" alt="menuButton">
-
+                        <mat-icon id="arrowRight">arrow_forward_ios
+                        </mat-icon>
 
 
                     </div>
                     <div class="link">
                         <a mat-list-item href="#">INZICHTEN</a>
-                        <img id="arrowRight"  src="../../../assets/arrow_right.png" alt="menuButton">
+                        <mat-icon id="arrowRight">arrow_forward_ios
+                        </mat-icon>
+
 
                     </div>
                     <div class="link">
                         <a mat-list-item href="#">DOELEN</a>
-                        <img id="arrowRight"  src="../../../assets/arrow_right.png" alt="menuButton">
-
+                        <mat-icon id="arrowRight">arrow_forward_ios
+                        </mat-icon>
                     </div>
                     <div class="lastlink">
                         <a mat-list-item href="#">GEGEVENS</a>
-                        <img id="arrowRight"  src="../../../assets/arrow_right.png" alt="menuButton">
-
+                        <mat-icon id="arrowRight">arrow_forward_ios
+                        </mat-icon>
                     </div>
-                    
+
                 </mat-nav-list>
             </mat-sidenav>
-      
+
         </mat-sidenav-container>
-        <button  type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
             <img src="../../../assets/header/menuIcon.png" alt="menuButton">
         </button>
 
     </div>
-<div class="center">
-    Hi userName !
-</div>
-<div class="right">
-    <img src="../../../assets/header/bellIcon.png" alt="menubutton">
-</div>
+    <div class="center">
+        Hi userName !
+    </div>
+    <div class="right">
+        <img src="../../../assets/header/bellIcon.png" alt="menubutton">
+    </div>
 </div>
