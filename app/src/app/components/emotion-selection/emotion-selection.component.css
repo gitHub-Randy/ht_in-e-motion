@@ -93,11 +93,13 @@ mat-card-actions{
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .nextButton{
   background-color: #67BCD9;
- 
 }
 
 

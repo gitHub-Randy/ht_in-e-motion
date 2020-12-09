@@ -34,8 +34,6 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   }
 
-
-
   initGifs() {
     this.chosenEmotions.forEach(emotion => {
       if (this.currentEmotion == emotion.emotionName) {
@@ -44,9 +42,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
         this.greyOutNotSelectedGifs(test);
       }
     })
-
   }
-
 
   initChips() {
 
@@ -76,7 +72,6 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   }
 
-
   removeChosenEmotion(event: any) {
     this.chosenEmotions.forEach((emotion, index) => {
       if (emotion.emotionName == event.target.id) {
@@ -99,7 +94,6 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   }
 
-
   checkIfSelectedEmotionIsNew(chip: any) {
     let chosenEmotionContainsSelectedEmotion = false;
     this.chosenEmotions.forEach(chosen => {
@@ -110,7 +104,6 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     })
     return chosenEmotionContainsSelectedEmotion;
   }
-
 
   makeChipPreselected(chip: any) {
     chip.style.backgroundColor = "#ffffff";
@@ -142,6 +135,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     });
     return currentChipIsInCurrentChipSet;
   }
+
   selectedEmotion(chip: any) {
     
     let emotionChip: HTMLElement = chip;

@@ -2,6 +2,56 @@ body{
     background-color:#FBE2E4;
 }
 
+.skip{
+    text-align: right;
+}
+.skipbutton{
+    background-color: white;
+    border: none;
+    border-radius: 18px;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    font-weight: 550;
+    color: #403D46;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.20);
+    padding: 2% 3% 2% 3%;
+}
+
 .content{
     text-align: center;
+    margin: 50% auto auto auto;
 }
+
+.bottom-bar{
+    display: grid;
+    justify-content: space-between;
+    margin: 30% 7% auto 7%;
+  }
+  
+  .prev{
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  
+  .prevButton{
+    background-color: #ffffff;
+  
+  }
+  
+  .next{
+    display: grid;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nextButton{
+    background-color: #E35663;
+  }
