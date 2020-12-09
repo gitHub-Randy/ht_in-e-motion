@@ -16,6 +16,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MenuComponent } from './components/menu/menu.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { NavComponent } from './components/nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -25,6 +31,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     EmotionStrengthsComponent,
     EmotionDescriptionComponent,
     HeaderComponent,
+    MenuComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,11 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatCardModule,
     MatInputModule,
     ScrollingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
