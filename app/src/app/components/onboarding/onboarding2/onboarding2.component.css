@@ -14,7 +14,9 @@ body{
     font-weight: 550;
     color: #403D46;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.20);
-    padding: 2% 3% 2% 3%;
+    padding: 1% 4% 1% 4%;
+    margin-top: 5%;
+    margin-right: 5%;
 }
 
 .content{
