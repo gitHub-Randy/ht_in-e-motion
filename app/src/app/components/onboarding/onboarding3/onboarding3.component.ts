@@ -13,6 +13,14 @@ export class Onboarding3Component implements OnInit {
   ngOnInit(): void {
   }
 
+  skip(){
+    this.router.navigateByUrl('emotions')
+  }
+
+  nextpage(){
+    this.router.navigateByUrl('emotions');
+  }
+
   prevpage(){
     this.router.navigateByUrl('onboarding/2');
   }

@@ -2,6 +2,34 @@ body{
     background-color:#FDF4E3;
 }
 
+.cloud1{
+  z-index: 1;
+  position: absolute;
+  margin-top: 10%;
+  margin-left: 30%;
+  transform: scale(0.5);
+}
+
+.cloud2{
+  z-index: 1;
+  position: absolute;
+  margin-top: 120%;
+  margin-left: -20%;
+}
+
+.cloud3{
+  z-index: 1;
+  position: absolute;
+  margin-top: 160%;
+  margin-left: 50%;
+  transform: scale(0.5);
+}
+
+.page{
+  z-index: 2;
+  position: relative;
+}
+
 .skip{
     display: flex;
     justify-content: space-between;
