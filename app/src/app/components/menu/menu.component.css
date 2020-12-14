@@ -1,0 +1,13 @@
+.menu{
+    background-color: tomato;
+    width: 80%;
+    height: 100vh;
+    z-index: 200;
+    position: absolute;
+
+}
+
+.menuButtons{
+    z-index: 300;
+    position: absolute;
+}

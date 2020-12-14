@@ -20,6 +20,12 @@ import { StartComponent } from './components/onboarding/start/start.component';
 import { Onboarding1Component } from './components/onboarding/onboarding1/onboarding1.component';
 import { Onboarding2Component } from './components/onboarding/onboarding2/onboarding2.component';
 import { Onboarding3Component } from './components/onboarding/onboarding3/onboarding3.component';
+import { MenuComponent } from './components/menu/menu.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { NavComponent } from './components/nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -29,6 +35,8 @@ import { Onboarding3Component } from './components/onboarding/onboarding3/onboar
     EmotionStrengthsComponent,
     EmotionDescriptionComponent,
     HeaderComponent,
+    MenuComponent,
+    NavComponent,
     StartComponent,
     Onboarding1Component,
     Onboarding2Component,
@@ -45,7 +53,11 @@ import { Onboarding3Component } from './components/onboarding/onboarding3/onboar
     MatCardModule,
     MatInputModule,
     ScrollingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
