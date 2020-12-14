@@ -16,6 +16,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { StartComponent } from './components/onboarding/start/start.component';
+import { Onboarding1Component } from './components/onboarding/onboarding1/onboarding1.component';
+import { Onboarding2Component } from './components/onboarding/onboarding2/onboarding2.component';
+import { Onboarding3Component } from './components/onboarding/onboarding3/onboarding3.component';
 
 
 @NgModule({
@@ -25,6 +29,10 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     EmotionStrengthsComponent,
     EmotionDescriptionComponent,
     HeaderComponent,
+    StartComponent,
+    Onboarding1Component,
+    Onboarding2Component,
+    Onboarding3Component,
   ],
   imports: [
     BrowserModule,

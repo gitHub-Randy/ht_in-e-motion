@@ -1,0 +1,96 @@
+body{
+    background-color:#FBE2E4;
+}
+
+.cloud{
+  z-index: 1;
+  position: absolute;
+  margin-top: 15%;
+  margin-left: -30%;
+  transform: scale(0.5);
+}
+
+.cloud2{
+  z-index: 1;
+  position: absolute;
+  margin-top: 110%;
+  margin-left: 50%;
+  transform: scale(0.5);
+}
+
+.cloud3{
+  z-index: 1;
+  position: absolute;
+  margin-top: 152%;
+  margin-left: -5%;
+  transform: scale(0.7);
+}
+
+.page{
+  z-index: 2;
+  position: relative;
+}
+
+.skip{
+    text-align: right;
+}
+.skipbutton{
+    background-color: white;
+    border: none;
+    border-radius: 18px;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    font-weight: 550;
+    color: #403D46;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.20);
+    padding: 1% 4% 1% 4%;
+    margin-top: 5%;
+    margin-right: 5%;
+}
+
+.content{
+    text-align: center;
+    margin: 30% auto auto auto;
+}
+
+.pentagon{
+    text-align: right;
+}
+
+h1{
+    margin: auto;
+}
+
+.bottom-bar{
+    display: grid;
+    justify-content: space-between;
+    margin: 70% 7% auto 7%;
+  }
+  
+  .prev{
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  
+  .prevButton{
+    background-color: #ffffff;
+  
+  }
+  
+  .next{
+    display: grid;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nextButton{
+    background-color: #E35663;
+  }
