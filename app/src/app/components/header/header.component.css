@@ -1,10 +1,11 @@
-.background {
+/* .background {
   z-index: -1;
   position: absolute;
-}
+} */
 
 .content {
   display: flex;
+  margin: auto;
   justify-content: space-between;
 }
 

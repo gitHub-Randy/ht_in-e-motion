@@ -26,6 +26,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { HammerModule} from '@angular/platform-browser';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     LayoutModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    HammerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

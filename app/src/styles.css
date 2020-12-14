@@ -5,7 +5,13 @@ html, body{
     color: #403D46
 }
 html{
-    background-color: rgb(103, 188, 217, .2)
+    background-color: rgb(103, 188, 217, .2);
+    background-image: url(./assets//header/headerbackground.png);
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    background-position-x: center;
+    background-size: contain;
+
 }
 body{
     margin: 0;

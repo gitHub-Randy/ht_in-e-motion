@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <div class="help">
     <h3>HOE VOEL JE JE VANDAAG?</h3>
     <p>
@@ -6,7 +7,13 @@
     je gevoel weergeeft!
     </p>
 </div>
-<div class="selection">
+<div class="carrousel" >
+
+<button mat-icon-button (click)="onLeft()" id="leftBtn">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+</button>
+<div class="selection" [@emotionTrigger]="animationState" (@emotionTrigger.done)="resetAnimationState()" (swipeRight)="startAnimation('slideRight')" (swipeLeft)="startAnimation('slideLeft')">
+    
     <mat-card class="other" *ngIf="other">
         <mat-card-title>Anders...</mat-card-title>
         <mat-card-content>
@@ -16,16 +23,13 @@
             <button mat-button (click)="otherEmotion()">OK</button>
         </mat-card-actions>
     </mat-card>
-
-    <div class="categorySelect">
-        <button mat-icon-button (click)="onLeft()">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
+    
+    <div class="categorySelect" >
+       
         <p class="categoryWord">{{currentCategory.categoryName}}</p>
-        <button mat-icon-button (click)="onRight()">
-            <mat-icon>keyboard_arrow_right</mat-icon>
-        </button>
+       
     </div>
+
     <div class="chipDiv">
         <mat-chip-list multiple [selectable]="true">
             <div class="gridContainer" aria-label="emotion selection">
@@ -36,7 +40,6 @@
                     <mat-icon matChipRemove id="{{emotion.emotionName}}" *ngIf="emotion.chipState == true" style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event)">cancel</mat-icon>
 
                 </mat-chip>
-                <mat-chip class="gridItem-{{chipData.length}}" (click)="otherEmotion()">ANDERS..</mat-chip>
             </div>
         </mat-chip-list>
     </div>
@@ -52,10 +55,15 @@
         </div>
     </div>
 
-
     
 </div>
 
+<button mat-icon-button (click)="onRight()" id="rightBtn">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+</button>
+
+    
+</div>
 <div class="bottom-bar">
     <div class="prev">
         <button mat-fab class="prevButton"><img src="../../../assets/icons/prev.png"></button> Vorige
