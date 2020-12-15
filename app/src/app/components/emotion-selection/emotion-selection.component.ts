@@ -51,6 +51,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   selectionComplete = false
   currentChip: chipData;
   currentEmotion: String;
+  currentEmotionIndex: number;
 
   animationState: string;
 
@@ -333,8 +334,11 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   onRight() {
     if (this.currentCategory.possibleCategroyIndex < POSSIBLE_CATEGROYS.length - 1) {
       this.currentCategory.possibleCategroyIndex += 1;
+      this.currentEmotionIndex +=1
     } else {
       this.currentCategory.possibleCategroyIndex = 0;
+      this.currentEmotionIndex = 0
+
     }
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
@@ -347,8 +351,12 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   onLeft() {
     if (this.currentCategory.possibleCategroyIndex > 0) {
       this.currentCategory.possibleCategroyIndex -= 1;
+      this.currentEmotionIndex -= 1;
+
     } else {
       this.currentCategory.possibleCategroyIndex = POSSIBLE_CATEGROYS.length - 1;
+      this.currentEmotionIndex =  POSSIBLE_CATEGROYS.length - 1;
+
     }
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();

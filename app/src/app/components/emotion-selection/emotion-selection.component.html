@@ -3,67 +3,86 @@
 <div class="help">
     <h3>HOE VOEL JE JE VANDAAG?</h3>
     <p>
-    Kies een of meerdere GIF’s wat <br>
-    je gevoel weergeeft!
+        Kies een of meerdere GIF’s wat <br>
+        je gevoel weergeeft!
     </p>
 </div>
-<div class="carrousel" >
+<div class="carrousel">
 
-<button mat-icon-button (click)="onLeft()" id="leftBtn">
-    <mat-icon>keyboard_arrow_left</mat-icon>
-</button>
-<div class="selection" [@emotionTrigger]="animationState" (@emotionTrigger.done)="resetAnimationState()" (swipeRight)="startAnimation('slideRight')" (swipeLeft)="startAnimation('slideLeft')">
-    
-    <mat-card class="other" *ngIf="other">
-        <mat-card-title>Anders...</mat-card-title>
-        <mat-card-content>
-            <input placeholder="beschrijf hier je gevoel">
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-button (click)="otherEmotion()">OK</button>
-        </mat-card-actions>
-    </mat-card>
-    
-    <div class="categorySelect" >
-       
-        <p class="categoryWord">{{currentCategory.categoryName}}</p>
-       
-    </div>
+    <button mat-icon-button (click)="onLeft()" id="leftBtn">
+        <mat-icon id="categoryArrow">keyboard_arrow_left</mat-icon>
+    </button>
+    <div class="selection" [@emotionTrigger]="animationState" (@emotionTrigger.done)="resetAnimationState()"
+        (swipeRight)="startAnimation('slideRight')" (swipeLeft)="startAnimation('slideLeft')">
 
-    <div class="chipDiv">
-        <mat-chip-list multiple [selectable]="true">
-            <div class="gridContainer" aria-label="emotion selection">
-                <mat-chip *ngFor="let emotion of chipData; index as i" class="gridItem-{{i}}" id="{{emotion.emotionName}}"    (click)="selectedEmotion($event.target)"> 
- 
+        <mat-card class="other" *ngIf="other">
+            <mat-card-title>Anders...</mat-card-title>
+            <mat-card-content>
+                <input placeholder="beschrijf hier je gevoel">
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="otherEmotion()">OK</button>
+            </mat-card-actions>
+        </mat-card>
 
-                    {{emotion.emotionName}} 
-                    <mat-icon matChipRemove id="{{emotion.emotionName}}" *ngIf="emotion.chipState == true" style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event)">cancel</mat-icon>
+        <div class="categorySelect">
 
-                </mat-chip>
-            </div>
-        </mat-chip-list>
-    </div>
+            <p class="categoryWord">{{currentCategory.categoryName}}</p>
 
-    <div class="gifs">
-        <div *ngIf="shouldShowGifs">
-            <cdk-virtual-scroll-viewport itemSize="77" class="scrollContainer">
-                <div class="gifGrid">
-                    <img  id="gif-{{i}}" *ngFor="let src of gifSources;index as i;" src={{src}}
-                        alt="Card image cap" (click)="selectGif($event.target)" >
-                </div>
-            </cdk-virtual-scroll-viewport>
         </div>
+
+        <div class="chipDiv">
+            <mat-chip-list multiple [selectable]="true">
+                <div class="gridContainer" aria-label="emotion selection">
+                    <mat-chip *ngFor="let emotion of chipData; index as i" class="gridItem-{{i}}"
+                        id="{{emotion.emotionName}}" (click)="selectedEmotion($event.target)">
+
+
+                        {{emotion.emotionName}}
+                        <mat-icon matChipRemove id="{{emotion.emotionName}}" *ngIf="emotion.chipState == true"
+                            style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event)">cancel</mat-icon>
+
+                    </mat-chip>
+                </div>
+            </mat-chip-list>
+        </div>
+
+        <div class="gifs">
+            <div *ngIf="shouldShowGifs">
+                <cdk-virtual-scroll-viewport itemSize="77" class="scrollContainer">
+                    <div class="gifGrid">
+                        <img id="gif-{{i}}" *ngFor="let src of gifSources;index as i;" src={{src}} alt="Card image cap"
+                            (click)="selectGif($event.target)">
+                    </div>
+                </cdk-virtual-scroll-viewport>
+            </div>
+        </div>
+
+
     </div>
 
-    
+    <button mat-icon-button (click)="onRight()" id="rightBtn">
+        <mat-icon id="categoryArrow">keyboard_arrow_right</mat-icon>
+    </button>
+
+
 </div>
 
-<button mat-icon-button (click)="onRight()" id="rightBtn">
-    <mat-icon>keyboard_arrow_right</mat-icon>
-</button>
+<div class="swipeControls">
+    <mat-icon>lens</mat-icon>
+    <mat-icon>panorama_fish_eye
+    </mat-icon>
+    <mat-icon>panorama_fish_eye
+    </mat-icon>
+    <mat-icon>panorama_fish_eye
+    </mat-icon>
+    <mat-icon>panorama_fish_eye
+    </mat-icon>
+    <mat-icon>panorama_fish_eye
+    </mat-icon>
 
-    
 </div>
+
 <div class="bottom-bar">
     <div class="prev">
         <button mat-fab class="prevButton"><img src="../../../assets/icons/prev.png"></button> Vorige
