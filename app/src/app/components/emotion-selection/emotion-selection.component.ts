@@ -6,12 +6,39 @@ import { afschuw, angst, boos, verdriet, verrassing, vreugde } from 'src/app/mod
 import { HeaderComponent } from '../header/header.component';
 import { GifServiceService } from 'src/app/gif-service.service';
 const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW"]
+import { trigger, keyframes, animate, transition, sequence, stagger, query } from '@angular/animations'
+import * as kf from './keyframes';
+import 'hammerjs';
 
 @Component({
   selector: 'app-emotion-selection',
   templateUrl: './emotion-selection.component.html',
-  styleUrls: ['./emotion-selection.component.css']
+  styleUrls: ['./emotion-selection.component.css'],
+  animations: [
+    trigger('emotionTrigger', [
+      transition('* => slideRight', [
+        query(':self', [
+          stagger(0, [
+            animate(100, keyframes(kf.slideOutRight)),
+            animate(100, keyframes(kf.slideInLeft)),
+          ])
+        ], { optional: false })
+      ] ,
+
+      ),
+      transition('* => slideLeft', [
+        query(':self', [
+          stagger(0, [
+            animate(100, keyframes(kf.slideOutLeft)),
+            animate(100, keyframes(kf.slideInRight)),
+          ])
+        ], { optional: false })
+      ] ,
+
+      ),
+    ])]
 })
+
 export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef) { }
@@ -24,6 +51,9 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   selectionComplete = false
   currentChip: chipData;
   currentEmotion: String;
+  currentEmotionIndex: number;
+
+  animationState: string;
 
   ngOnInit(): void {
     this.currentCategory = {
@@ -32,6 +62,28 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     }
     this.getChipData();
 
+  }
+
+
+  startAnimation(state) {
+    console.log(state);
+    if (!this.animationState) {
+      this.animationState = state
+    }
+
+  }
+
+  resetAnimationState() {
+    console.log(this.animationState)
+    if (this.animationState == "slideRight") {
+      this.onLeft();
+    }
+    if (this.animationState == "slideLeft") {
+      
+      this.onRight();
+    }
+    console.log("reset")
+    this.animationState = '';
   }
 
   initGifs() {
@@ -86,7 +138,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
     let currentChip = document.getElementById(event.target.id);
     this.selectedEmotion(currentChip);
- 
+
 
     if (this.chosenEmotions.length == 0) {
       this.selectionComplete = false;
@@ -137,7 +189,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   }
 
   selectedEmotion(chip: any) {
-    
+
     let emotionChip: HTMLElement = chip;
     if (!this.checkIfSelectedEmotionIsNew(emotionChip)) {
       this.makeChipPreselected(emotionChip)
@@ -148,7 +200,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
     this.currentEmotion = emotionChip.id
     this.showGifs(emotionChip.id)
-   
+
 
 
   }
@@ -168,7 +220,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
         }
       })
-    
+
     } else {
       this.greyOutNotSelectedGifs(event)
       this.addToChosenGifs(event)
@@ -282,8 +334,11 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   onRight() {
     if (this.currentCategory.possibleCategroyIndex < POSSIBLE_CATEGROYS.length - 1) {
       this.currentCategory.possibleCategroyIndex += 1;
+      this.currentEmotionIndex +=1
     } else {
       this.currentCategory.possibleCategroyIndex = 0;
+      this.currentEmotionIndex = 0
+
     }
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
@@ -296,8 +351,12 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   onLeft() {
     if (this.currentCategory.possibleCategroyIndex > 0) {
       this.currentCategory.possibleCategroyIndex -= 1;
+      this.currentEmotionIndex -= 1;
+
     } else {
       this.currentCategory.possibleCategroyIndex = POSSIBLE_CATEGROYS.length - 1;
+      this.currentEmotionIndex =  POSSIBLE_CATEGROYS.length - 1;
+
     }
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
@@ -355,5 +414,5 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     this.other = !this.other;
   }
 
- 
+
 }
