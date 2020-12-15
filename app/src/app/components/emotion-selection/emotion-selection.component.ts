@@ -414,13 +414,16 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   changeSwipeControlColorToBlue() {
     let test = document.getElementById("swipeControls").childNodes;
     let iconToChange = test[this.currentCategory.possibleCategroyIndex];
-   iconToChange.style.color = "#68BCD8";
+    iconToChange.style.color = "#68BCD8";
+    iconToChange.style.backgroundColor  = "#68BCD8"
   }
 
   changeSwipeControlColorToWhite() {
     let test = document.getElementById("swipeControls").childNodes;
     let iconToChange = test[this.currentCategory.possibleCategroyIndex];
     iconToChange.style.color = "#FFFFFF";
+    iconToChange.style.backgroundColor = "#FFFFFF"
+
 
   }
 
