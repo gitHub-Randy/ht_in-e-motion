@@ -2,17 +2,22 @@
         <app-header></app-header>
         <div class='content'>
             <h3>HOE STERK ZIJN DEZE <br> GEVOELENS?</h3>
-            <p>
-                Geef dit aan met de schuifbalk!
-            </p>
-            <div class="card">
-                <h3>Gevoel</h3>
-                <div class="gif">
-
+            <div class="carrousel">
+                <button mat-icon-button (click)="onLeft()" id="leftBtn">
+                    <mat-icon id="categoryArrow">keyboard_arrow_left</mat-icon>
+                </button> 
+                <div class="card">
+                    <h3>{{chosenEmotions[currentIndex].emotionName}}</h3>
+                    <div class="gif">
+                        <img src={{chosenEmotions[currentIndex].gif}}>
+                    </div>
+                    <div class="slider">
+                        insert slider here
+                    </div>
                 </div>
-                <div class="slider">
-
-                </div>
+                <button mat-icon-button (click)="onRight()" id="rightBtn">
+                    <mat-icon id="categoryArrow">keyboard_arrow_right</mat-icon>
+                </button>
             </div>
         </div>
         <div class="bottom-bar">

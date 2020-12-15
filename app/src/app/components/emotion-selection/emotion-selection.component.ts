@@ -9,6 +9,7 @@ const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING"
 import { trigger, keyframes, animate, transition, sequence, stagger, query } from '@angular/animations'
 import * as kf from './keyframes';
 import 'hammerjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-emotion-selection',
@@ -41,7 +42,7 @@ import 'hammerjs';
 
 export class EmotionSelectionComponent implements OnInit, OnChanges {
 
-  constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef) { }
+  constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef, private router: Router) { }
   currentCategory: category;
   chipData: chipData[] = [];
   chosenEmotions: choosenEmotions[] = [];
@@ -61,7 +62,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
       possibleCategroyIndex: 0
     }
     this.getChipData();
-
+    this.setbg();
   }
 
 
@@ -204,6 +205,18 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
 
   }
+
+  sendEmotions(){
+    console.log("click");
+    this.router.navigate(['emotions/strengths'], {state: {chosenEmotions: this.chosenEmotions }});
+  }
+
+  setbg() {
+    let doc = document.getElementById('html');
+    doc.style.backgroundImage = "url('../../../assets/header/headerbackground.png')";
+    doc.style.backgroundColor = "rgb(103, 188, 217, .2)"
+  }
+
 
   // makes not selected gifs gray
   // changes chosenEmotions with gif url
