@@ -14,17 +14,21 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   constructor() { }
 
   ngAfterViewInit(): void {
-    this.setbg();
     this.setT();
   }
 
   ngOnInit(): void {
+    this.setbg();
+
   }
 
 
   setbg() {
-    this.childComponent.setBackground("headerbackgroundYellow.png");
+    let doc = document.getElementById('html');
+    doc.style.backgroundImage = "url('../../../assets/header/headerbackgroundYellow.png')";
+    doc.style.backgroundColor = "#FDF4E3"
   }
+
   
   setT(){
     this.childComponent.setTitle("Jouw gevoelens voor vandaag");
