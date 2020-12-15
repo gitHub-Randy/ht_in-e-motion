@@ -5,7 +5,7 @@ import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
 import { afschuw, angst, boos, verdriet, verrassing, vreugde } from 'src/app/models/emotionEnum';
 import { HeaderComponent } from '../header/header.component';
 import { GifServiceService } from 'src/app/gif-service.service';
-const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW"]
+const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW", "ANDERS"]
 import { trigger, keyframes, animate, transition, sequence, stagger, query } from '@angular/animations'
 import * as kf from './keyframes';
 import 'hammerjs';
@@ -379,7 +379,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
       this.currentEmotionIndex +=1
     } else {
       this.currentCategory.possibleCategroyIndex = 0;
-      this.currentEmotionIndex = 0
+      this.currentEmotionIndex = 0 
 
     }
     this.changeSwipeControlColorToBlue();
@@ -450,11 +450,25 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
       case "AFSCHUW":
         this.chipData = this.convertEnumToArray(afschuw);
         break;
+      case "ANDERS":
+        this.chipData = this.fillAnders();
     }
     this.ref.detectChanges();
     this.initChips();
   }
 
+
+  fillAnders() {
+
+        let emotionArray = [];
+        let tempObject = {
+          emotionName: "Typ hier een nieuwe emotie in",
+          chipState: false
+    }
+    emotionArray.push(tempObject);
+    return emotionArray;
+
+  }
 
   // returns  an array filled with the avaiable emotions as strings
   convertEnumToArray(enumObject: Object) {
