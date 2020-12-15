@@ -18,7 +18,7 @@ import 'hammerjs';
     trigger('emotionTrigger', [
       transition('* => slideRight', [
         query(':self', [
-          stagger(0, [
+          stagger(1000, [
             animate(100, keyframes(kf.slideOutRight)),
             animate(100, keyframes(kf.slideInLeft)),
           ])
@@ -28,15 +28,21 @@ import 'hammerjs';
       ),
       transition('* => slideLeft', [
         query(':self', [
-          stagger(0, [
+          stagger(1000, [
             animate(100, keyframes(kf.slideOutLeft)),
             animate(100, keyframes(kf.slideInRight)),
+        
           ])
         ], { optional: false })
       ] ,
 
       ),
-    ])]
+    ]),
+
+
+
+  
+  ]
 })
 
 export class EmotionSelectionComponent implements OnInit, OnChanges {
@@ -54,6 +60,8 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   currentEmotionIndex: number;
 
   animationState: string;
+
+  shouldChange: boolean = false;
 
   ngOnInit(): void {
     this.currentCategory = {
@@ -73,17 +81,20 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   }
 
+
+
   resetAnimationState() {
     console.log(this.animationState)
-    if (this.animationState == "slideRight") {
+    if (this.animationState == "slideRight" && !this.shouldChange) {
       this.onLeft();
-    }
-    if (this.animationState == "slideLeft") {
+    } 
+    if (this.animationState == "slideLeft" && !this.shouldChange) {
       
       this.onRight();
     }
     console.log("reset")
     this.animationState = '';
+    this.shouldChange = false;
   }
 
   initGifs() {
@@ -324,6 +335,35 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   }
 
 
+  goToIndex(index) {
+    let indexNew = index
+    console.log(indexNew)
+    if (indexNew > POSSIBLE_CATEGROYS.length-1) {
+      indexNew = 0
+    }
+    if (indexNew < 0) {
+      indexNew = POSSIBLE_CATEGROYS.length-1
+    }
+    console.log(indexNew)
+
+    let currentIndex = this.currentCategory.possibleCategroyIndex;
+    if (indexNew > currentIndex ) {
+      this.shouldChange = true;
+      this.startAnimation("slideLeft")
+    } else if(indexNew < currentIndex ) {
+      this.shouldChange = true;
+      this.startAnimation("slideRight")
+    }
+   
+
+    this.changeSwipeControlColorToWhite();
+
+    this.currentCategory.possibleCategroyIndex = indexNew;
+    this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
+    this.changeSwipeControlColorToBlue();
+    this.getChipData();
+
+  }
 
 
   // makes the currentCategory.possibleCategroyIndex the next index of POSSIBLE_CATEGORYS; 
@@ -332,6 +372,8 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   // gets the new set of chips
 
   onRight() {
+    this.changeSwipeControlColorToWhite();
+
     if (this.currentCategory.possibleCategroyIndex < POSSIBLE_CATEGROYS.length - 1) {
       this.currentCategory.possibleCategroyIndex += 1;
       this.currentEmotionIndex +=1
@@ -340,6 +382,8 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
       this.currentEmotionIndex = 0
 
     }
+    this.changeSwipeControlColorToBlue();
+
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
   }
@@ -349,17 +393,35 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   // sets the categoryName of currentCategory to the POSSIBLE_CATEGORYS index using the possibleCategoryIndex
   // gets the new set of chips
   onLeft() {
+    this.changeSwipeControlColorToWhite();
+
+ 
     if (this.currentCategory.possibleCategroyIndex > 0) {
-      this.currentCategory.possibleCategroyIndex -= 1;
-      this.currentEmotionIndex -= 1;
+      this.currentCategory.possibleCategroyIndex -= 1;  
 
     } else {
       this.currentCategory.possibleCategroyIndex = POSSIBLE_CATEGROYS.length - 1;
       this.currentEmotionIndex =  POSSIBLE_CATEGROYS.length - 1;
 
     }
+    
+    this.changeSwipeControlColorToBlue();
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
+  }
+
+
+  changeSwipeControlColorToBlue() {
+    let test = document.getElementById("swipeControls").childNodes;
+    let iconToChange = test[this.currentCategory.possibleCategroyIndex];
+   iconToChange.style.color = "#68BCD8";
+  }
+
+  changeSwipeControlColorToWhite() {
+    let test = document.getElementById("swipeControls").childNodes;
+    let iconToChange = test[this.currentCategory.possibleCategroyIndex];
+    iconToChange.style.color = "#FFFFFF";
+
   }
 
 

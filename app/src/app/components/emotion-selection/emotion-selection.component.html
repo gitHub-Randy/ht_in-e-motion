@@ -9,7 +9,7 @@
 </div>
 <div class="carrousel">
 
-    <button mat-icon-button (click)="onLeft()" id="leftBtn">
+    <button mat-icon-button (click)="goToIndex(currentCategory.possibleCategroyIndex-1)" id="leftBtn">
         <mat-icon id="categoryArrow">keyboard_arrow_left</mat-icon>
     </button>
     <div class="selection" [@emotionTrigger]="animationState" (@emotionTrigger.done)="resetAnimationState()"
@@ -61,25 +61,21 @@
 
     </div>
 
-    <button mat-icon-button (click)="onRight()" id="rightBtn">
+    <button mat-icon-button (click)="goToIndex(currentCategory.possibleCategroyIndex+1)" id="rightBtn">
         <mat-icon id="categoryArrow">keyboard_arrow_right</mat-icon>
     </button>
 
 
 </div>
 
-<div class="swipeControls">
-    <mat-icon>lens</mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
+<div class="swipeControls" id="swipeControls">
+    <mat-icon style="color: #68BCD8;" (click)="goToIndex(0)" >lens</mat-icon>
+    <mat-icon style="color: #FFFFFF;"(click)="goToIndex(1)" >lens</mat-icon>
+    <mat-icon style="color: #FFFFFF;"(click)="goToIndex(2)" >lens</mat-icon>
+    <mat-icon style="color: #FFFFFF;"(click)="goToIndex(3)" >lens</mat-icon>
+    <mat-icon style="color: #FFFFFF;"(click)="goToIndex(4)" >lens</mat-icon>
+    <mat-icon style="color: #FFFFFF;"(click)="goToIndex(5)" >lens</mat-icon>
+
 
 </div>
 
