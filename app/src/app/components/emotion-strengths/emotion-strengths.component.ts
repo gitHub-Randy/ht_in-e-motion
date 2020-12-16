@@ -34,22 +34,19 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   }
 
   onLeft(){
-    if(this.currentIndex < 0){
-      this.currentIndex = this.chosenEmotions.length +1;
+    if(this.currentIndex > 0){
+      this.currentIndex-=1;
     }else{
-      this.currentIndex -= 1;
-
+      this.currentIndex = this.chosenEmotions.length-1;
     }
   }
 
-
-
   onRight(){
-    if(this.currentIndex > this.chosenEmotions.length){
-      this.currentIndex = 0;
-    }else{
+    if(this.currentIndex < this.chosenEmotions.length - 1)
+    {
       this.currentIndex += 1;
-
+    }else{
+      this.currentIndex = 0;
     }
   }
 

@@ -27,6 +27,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { HammerModule} from '@angular/platform-browser';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { HammerModule} from '@angular/platform-browser';
     LayoutModule,
     MatToolbarModule,
     MatListModule,
-    HammerModule
+    HammerModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
