@@ -32,17 +32,16 @@
         </div>
 
         <div class="chipDiv">
-            <mat-chip-list multiple [selectable]="true">
+            <mat-chip-list multiple [selectable]="true" >
                 <div class="gridContainer" aria-label="emotion selection">
                     <mat-chip *ngFor="let emotion of chipData; index as i" class="gridItem-{{i}}"
                         id="{{emotion.emotionName}}" (click)="selectedEmotion($event.target)">
-
-
-                        {{emotion.emotionName}}
+                       {{emotion.emotionName}}
                         <mat-icon matChipRemove id="{{emotion.emotionName}}" *ngIf="emotion.chipState == true"
                             style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event)">cancel</mat-icon>
 
                     </mat-chip>
+                        <input class="andersInput" *ngIf="currentCategory.categoryName == 'ANDERS' " placeholder="Typ hier je emotie in" type="text"  (change)="showGifs($event.target.value)">
                 </div>
             </mat-chip-list>
         </div>

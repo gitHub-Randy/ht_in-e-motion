@@ -4,11 +4,12 @@ import { chipData } from '../../interfaces/chipData';
 import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
 import { afschuw, angst, boos, verdriet, verrassing, vreugde } from 'src/app/models/emotionEnum';
 import { HeaderComponent } from '../header/header.component';
-import { GifServiceService } from 'src/app/gif-service.service';
+import { GifServiceService } from 'src/app/services/gif-service.service';
 const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW", "ANDERS"]
 import { trigger, keyframes, animate, transition, sequence, stagger, query } from '@angular/animations'
 import * as kf from './keyframes';
 import 'hammerjs';
+import { type } from 'os';
 
 @Component({
   selector: 'app-emotion-selection',
@@ -62,6 +63,8 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   animationState: string;
 
   shouldChange: boolean = false;
+
+  andersInput: String = '';
 
   ngOnInit(): void {
     this.currentCategory = {
@@ -324,10 +327,16 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     // this.initGifs();
   }
   showGifs(emotionName: string) {
+    console.log(emotionName)
     this.shouldShowGifs = true;
 
     this.getGifs(emotionName);
 
+  }
+
+
+  RegisterAndersChip(emotionName: string) {
+    
   }
 
   hideGifs() {
@@ -412,7 +421,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
 
   changeSwipeControlColorToBlue() {
-    let test = document.getElementById("swipeControls").childNodes;
+    let test = document.getElementById("swipeControls").childNodes ;
     let iconToChange = test[this.currentCategory.possibleCategroyIndex];
     iconToChange.style.color = "#68BCD8";
     iconToChange.style.backgroundColor  = "#68BCD8"
@@ -461,11 +470,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   fillAnders() {
 
         let emotionArray = [];
-        let tempObject = {
-          emotionName: "Typ hier een nieuwe emotie in",
-          chipState: false
-    }
-    emotionArray.push(tempObject);
+ 
     return emotionArray;
 
   }

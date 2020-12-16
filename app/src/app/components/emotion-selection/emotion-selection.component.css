@@ -1,3 +1,22 @@
+
+.andersInput{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  color: black;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 22px;
+  border: none;
+  width: max-content;
+}
+
+.andersInput, textarea{
+  background-color: #ffffff
+  ;
+}
+
+input[type=text]:focus{
+  outline: none;     /* oranges! yey */
+}
 .carrousel{
   display: flex;
   flex-direction: row;
@@ -80,7 +99,7 @@ p {
   margin: auto;
   
   border-radius: 10px;
-  width: 95%;
+  width: 97%;
   height: 150px;
 }
 
@@ -159,6 +178,9 @@ justify-content: center;
   opacity: 0.2;
 }
 
+
+
+
 .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
   background-color: #2b4d59;
   color: rgb(255, 255, 255);
@@ -166,16 +188,19 @@ justify-content: center;
 
 .gridContainer {
   height: 100%;
-  width: 85%;
+  max-width: 85%;
+  /* min-width: 100%; */
+
   margin: auto;
   margin-top: 5px;
-  /* margin-right: 7%; */
+  margin-right: 7%;
   display: grid;
   grid-template-rows: 25px 25px 25px 25px;
-  /* grid-template-columns: 145px 0px 145px; */
+  grid-template-columns: 130px 0px 130px;
   justify-content: space-evenly;
   align-content: space-evenly;
-  gap: 10px 2px;
+  gap: 10px 0px;
+
 }
 
 .gridItem-0 {
