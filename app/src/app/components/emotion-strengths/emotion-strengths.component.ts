@@ -56,7 +56,7 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   describe(){
     let dialogRef = this.dialog.open(DescriptionComponent, {
       maxWidth: '85vw',
-      height: '370px',
+      height: '390px',
       width: '600px',
       panelClass: 'describe-panel'
     });

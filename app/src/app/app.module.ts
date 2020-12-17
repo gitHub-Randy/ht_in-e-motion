@@ -30,6 +30,7 @@ import { HammerModule} from '@angular/platform-browser';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DescriptionComponent } from './components/emotion-strengths/description/description.component';
+import { Onboarding4Component } from './components/onboarding/onboarding4/onboarding4.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { DescriptionComponent } from './components/emotion-strengths/description
     Onboarding2Component,
     Onboarding3Component,
     DescriptionComponent,
+    Onboarding4Component,
   ],
   imports: [
     BrowserModule,
