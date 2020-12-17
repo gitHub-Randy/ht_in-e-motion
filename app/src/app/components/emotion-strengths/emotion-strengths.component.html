@@ -15,7 +15,7 @@
                             <mat-slider>loading</mat-slider>
                     </div>
                     <div class="describe">
-                        <button mat-fab class="desButton"><img src="../../../assets/icons/editIcon.png"></button> Beschrijven
+                        <button mat-fab class="desButton" (click)="describe()"><img src="../../../assets/icons/editIcon.png"></button> Beschrijven
                     </div>
                 </div>
                 <button mat-icon-button (click)="onRight()" id="rightBtn">
@@ -25,7 +25,7 @@
         </div>
         <div class="bottom-bar">
             <div class="prev">
-                <button mat-fab class="prevButton"><img src="../../../assets/icons/prev.png"></button> Vorige
+                <button mat-fab class="prevButton" (click)="prevpage()"><img src="../../../assets/icons/prev.png"></button> Vorige
             </div>
           
             <div class="next">

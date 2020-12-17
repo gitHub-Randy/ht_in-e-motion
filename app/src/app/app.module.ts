@@ -28,6 +28,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { HammerModule} from '@angular/platform-browser';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DescriptionComponent } from './components/emotion-strengths/description/description.component';
 
 
 @NgModule({
@@ -43,6 +45,7 @@ import {MatSliderModule} from '@angular/material/slider';
     Onboarding1Component,
     Onboarding2Component,
     Onboarding3Component,
+    DescriptionComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatToolbarModule,
     MatListModule,
     HammerModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

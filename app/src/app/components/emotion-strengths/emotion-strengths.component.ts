@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
+import { MatDialog } from '@angular/material/dialog';
+import { DescriptionComponent } from './description/description.component';
 
 
 
@@ -17,7 +19,7 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   chosenEmotions: choosenEmotions[] = [];
   currentIndex: number = 0;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dialog: MatDialog) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {chosenEmotions: choosenEmotions[]};
     this.chosenEmotions = state.chosenEmotions;
@@ -50,6 +52,17 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     }
   }
 
+
+  describe(){
+    let dialogRef = this.dialog.open(DescriptionComponent, {
+      maxWidth: '85vw',
+      height: '370px',
+      width: '600px',
+      panelClass: 'describe-panel'
+    });
+  }
+
+
   setbg() {
     let doc = document.getElementById('html');
     doc.style.backgroundImage = "url('../../../assets/header/headerbackgroundYellow.png')";
@@ -62,5 +75,8 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     t.style.marginTop = "10%";
   }
 
+  prevpage(){
+    this.router.navigateByUrl('emotions');
+  }
 
 }
