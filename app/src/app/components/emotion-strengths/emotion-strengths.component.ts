@@ -9,6 +9,7 @@ import { HelpPopUpComponent } from './help-pop-up/help-pop-up.component';
 import { trigger, keyframes, animate, transition, sequence, stagger, query } from '@angular/animations'
 import * as kf from '../emotion-selection/keyframes';
 import 'hammerjs';
+import { HelpPopUp2Component } from './help-pop-up2/help-pop-up2.component';
 
 
 
@@ -51,7 +52,7 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   shouldChange: boolean = false;
 
 
-  constructor(private router: Router, private description: MatDialog, private help: MatDialog) {
+  constructor(private router: Router, private description: MatDialog, private help: MatDialog, private help2: MatDialog) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {chosenEmotions: choosenEmotions[]};
     this.chosenEmotions = state.chosenEmotions;
@@ -60,9 +61,13 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
     this.setT();
+    if(localStorage.getItem("checkedStrengthDialog2") == "false" || localStorage.getItem("checkedStrengthDialog2") == null) {
+      this.showHelp2();
+    }
     if(localStorage.getItem("checkedStrengthDialog") == "false" || localStorage.getItem("checkedStrengthDialog") == null) {
       this.showHelp();
     }
+   
   }
 
   ngOnInit(): void {
@@ -111,6 +116,15 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
       height: '390px',
       width: '600px',
       panelClass: 'help-panel'
+    })
+  }
+
+  showHelp2(){
+    this.help2.open(HelpPopUp2Component, {
+      maxWidth: '85vw',
+      height: '390px',
+      width: '600px',
+      panelClass: 'help-panel2'
     })
   }
 

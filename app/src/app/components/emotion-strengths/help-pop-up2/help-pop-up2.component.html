@@ -1,0 +1,20 @@
+<div class="content">
+    <div class="close">
+        <button class="closeButton" (click)="close()"> 
+            <mat-icon id="closeIcon">close</mat-icon>
+        </button>
+    </div>
+    <p>
+        Geef een extra beschrijving, <br>
+        zodat je weet hoe je je die dag <br> voelde!
+    </p>
+    <div class="bottom">
+        <div class="checkbox">
+            <mat-checkbox ([ngModel])="checked" (change)="onCheck()">Niet meer weergeven</mat-checkbox>
+        </div>
+        <div class="ok">
+            <button class="okButton" (click)="ok()">OK</button>
+        </div>
+        
+    </div>
+</div>
