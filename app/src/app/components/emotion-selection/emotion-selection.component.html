@@ -82,7 +82,7 @@
         <div class="addEmotion">
             <input id="andersInput" name="andersInput" class="andersInput" placeholder="Typ hier je emotie in"
                 type="text" (change)="addToAnders($event.target.value)">
-
+            <button mat-raised-button id="deleteBtn">emotie wissen</button>
         </div>
         <div class="FlexItems">
             <mat-chip *ngFor="let a of chipData; index as i" id="{{a.emotionName}}"
