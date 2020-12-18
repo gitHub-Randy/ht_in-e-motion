@@ -11,7 +11,9 @@ import * as kf from './keyframes';
 import 'hammerjs';
 import { Router } from '@angular/router';
 import { AndersService } from 'src/app/services/anders.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit } from '@angular/core';
+import {HelpPopUp3Component} from './help-pop-up3/help-pop-up3.component'
 @Component({
   selector: 'app-emotion-selection',
   templateUrl: './emotion-selection.component.html',
@@ -47,9 +49,9 @@ import { AndersService } from 'src/app/services/anders.service';
   ]
 })
 
-export class EmotionSelectionComponent implements OnInit {
+export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
-  constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef, private router: Router, private andersService: AndersService) { }
+  constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef, private router: Router, private andersService: AndersService,private help: MatDialog) { }
 
   //#region  variables
   currentCategory: category;
@@ -83,6 +85,25 @@ export class EmotionSelectionComponent implements OnInit {
     }
     this.getChipData();
     this.setbg();
+  }
+
+
+  ngAfterViewInit(): void {
+    if(localStorage.getItem("checkedSelectionDialog") == "false" || localStorage.getItem("checkedSelectionDialog") == null) {
+      this.showHelp();
+    }
+  
+   
+  }
+
+
+  showHelp(){
+    this.help.open(HelpPopUp3Component, {
+      maxWidth: '85vw',
+      height: '390px',
+      width: '600px',
+      panelClass: 'help-panel'
+    })
   }
 
   // checks the current categoryName and filss the chipData with corresponding emotions

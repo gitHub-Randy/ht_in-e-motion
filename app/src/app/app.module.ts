@@ -34,6 +34,7 @@ import { Onboarding4Component } from './components/onboarding/onboarding4/onboar
 import { HelpPopUpComponent } from './components/emotion-strengths/help-pop-up/help-pop-up.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HelpPopUp2Component } from './components/emotion-strengths/help-pop-up2/help-pop-up2.component';
+import { HelpPopUp3Component } from './components/emotion-selection/help-pop-up3/help-pop-up3.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { HelpPopUp2Component } from './components/emotion-strengths/help-pop-up2
     Onboarding4Component,
     HelpPopUpComponent,
     HelpPopUp2Component,
+    HelpPopUp3Component,
   ],
   imports: [
     BrowserModule,
