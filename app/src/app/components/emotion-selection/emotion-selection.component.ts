@@ -4,8 +4,8 @@ import { chipData } from '../../interfaces/chipData';
 import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
 import { afschuw, angst, boos, verdriet, verrassing, vreugde } from 'src/app/models/emotionEnum';
 import { HeaderComponent } from '../header/header.component';
-import { GifServiceService } from 'src/app/gif-service.service';
-const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW"]
+import { GifServiceService } from 'src/app/services/gif-service.service';
+const POSSIBLE_CATEGROYS = ["VREUGDE", "VERDRIET", "ANGST", "BOOS", "VERRASSING", "AFSCHUW", "ANDERS"]
 import { trigger, keyframes, animate, transition, sequence, stagger, query } from '@angular/animations'
 import * as kf from './keyframes';
 import 'hammerjs';
@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
     trigger('emotionTrigger', [
       transition('* => slideRight', [
         query(':self', [
-          stagger(0, [
+          stagger(1000, [
             animate(100, keyframes(kf.slideOutRight)),
             animate(100, keyframes(kf.slideInLeft)),
           ])
@@ -29,15 +29,21 @@ import { Router } from '@angular/router';
       ),
       transition('* => slideLeft', [
         query(':self', [
-          stagger(0, [
+          stagger(1000, [
             animate(100, keyframes(kf.slideOutLeft)),
             animate(100, keyframes(kf.slideInRight)),
+        
           ])
         ], { optional: false })
       ] ,
 
       ),
-    ])]
+    ]),
+
+
+
+  
+  ]
 })
 
 export class EmotionSelectionComponent implements OnInit, OnChanges {
@@ -55,6 +61,13 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   currentEmotionIndex: number;
 
   animationState: string;
+
+  shouldChange: boolean = false;
+
+  andersInput: String = '';
+
+
+  newAnders: chipData[] = [];
 
   ngOnInit(): void {
     this.currentCategory = {
@@ -74,17 +87,20 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   }
 
+
+
   resetAnimationState() {
     console.log(this.animationState)
-    if (this.animationState == "slideRight") {
+    if (this.animationState == "slideRight" && !this.shouldChange) {
       this.onLeft();
-    }
-    if (this.animationState == "slideLeft") {
+    } 
+    if (this.animationState == "slideLeft" && !this.shouldChange) {
       
       this.onRight();
     }
     console.log("reset")
     this.animationState = '';
+    this.shouldChange = false;
   }
 
   initGifs() {
@@ -126,6 +142,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   }
 
   removeChosenEmotion(event: any) {
+    console.log("chosenEmotions", this.chosenEmotions)
     this.chosenEmotions.forEach((emotion, index) => {
       if (emotion.emotionName == event.target.id) {
         this.chosenEmotions.splice(index, 1);
@@ -162,14 +179,26 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     chip.style.backgroundColor = "#ffffff";
     chip.style.color = "#000000";
     chip.style.border = "2px solid #67BCD9"
-    this.chipData.forEach(data => {
-      if (data.emotionName == chip.id) {
-        data.chipState = false
-
-        this.makeOldChipNotPreselected();
-        this.currentChip = data;
-      }
-    })
+    if (this.currentCategory.categoryName != "ANDERS") {
+      this.chipData.forEach(data => {
+        if (data.emotionName == chip.id) {
+          data.chipState = false
+  
+          this.makeOldChipNotPreselected();
+          this.currentChip = data;
+        }
+      })
+    } else {
+      this.newAnders.forEach(data => {
+        if (data.emotionName == chip.id) {
+          data.chipState = false
+  
+          this.makeOldChipNotPreselected();
+          this.currentChip = data;
+        }
+      })
+    }
+ 
   }
 
   makeOldChipNotPreselected() {
@@ -181,11 +210,19 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
   currentChipBelongsToCurrentChipSet() {
     let currentChipIsInCurrentChipSet = false;
-    this.chipData.forEach(data => {
-      if (data.emotionName == this.currentChip.emotionName) {
-        currentChipIsInCurrentChipSet = true;
-      }
-    });
+    if (this.currentCategory.categoryName == "ANDERS") {
+      this.newAnders.forEach(data => {
+        if (data.emotionName == this.currentChip.emotionName) {
+          currentChipIsInCurrentChipSet = true;
+        }
+      });
+    } else {
+      this.chipData.forEach(data => {
+        if (data.emotionName == this.currentChip.emotionName) {
+          currentChipIsInCurrentChipSet = true;
+        }
+      });
+    }   
     return currentChipIsInCurrentChipSet;
   }
 
@@ -223,6 +260,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   //changes chip color
   selectGif(event: any) {
 
+    console.log(event)
     if (this.checkIfSelectedGifAlreadyChosen(event)) {
       let newGifforOldEmotion = document.getElementById(event.id);
       this.chosenEmotions.forEach(emotion => {
@@ -235,9 +273,11 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
       })
 
     } else {
+      console.log("adding")
       this.greyOutNotSelectedGifs(event)
       this.addToChosenGifs(event)
       this.makeChipSelected();
+      console.log(this.chosenEmotions)
     }
 
   }
@@ -259,6 +299,7 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   addToChosenGifs(gifImageElement: HTMLImageElement) {
     let gifURL = gifImageElement.src;
     let updatedChosenEmotion = false;
+    console.log(gifURL)
     this.chosenEmotions.forEach(emotion => {
       if (this.currentChip.emotionName == emotion.emotionName) {
         emotion.gif = gifURL
@@ -282,16 +323,28 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
 
 
   makeChipSelected() {
+    console.log(this.currentChip.emotionName)
 
     let chip = document.getElementById(this.currentChip.emotionName);
     chip.style.border = "0px solid #ffffff";
     chip.style.backgroundColor = "#2B4D59";
     chip.style.color = "#ffffff";
-    this.chipData.forEach(data => {
-      if (data.emotionName == chip.id) {
-        data.chipState = true
-      }
-    })
+
+    if (this.currentCategory.categoryName == "ANDERS") {
+      this.newAnders.forEach(data => {
+        if (data.emotionName == chip.id) {
+          data.chipState = true
+        }
+      })
+    } else {
+      this.chipData.forEach(data => {
+        if (data.emotionName == chip.id) {
+          data.chipState = true
+        }
+      })
+    }
+
+   
 
   }
 
@@ -326,10 +379,16 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
     // this.initGifs();
   }
   showGifs(emotionName: string) {
+    console.log(emotionName)
     this.shouldShowGifs = true;
 
     this.getGifs(emotionName);
 
+  }
+
+
+  RegisterAndersChip(emotionName: string) {
+    
   }
 
   hideGifs() {
@@ -337,6 +396,35 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   }
 
 
+  goToIndex(index) {
+    let indexNew = index
+    console.log(indexNew)
+    if (indexNew > POSSIBLE_CATEGROYS.length-1) {
+      indexNew = 0
+    }
+    if (indexNew < 0) {
+      indexNew = POSSIBLE_CATEGROYS.length-1
+    }
+    console.log(indexNew)
+
+    let currentIndex = this.currentCategory.possibleCategroyIndex;
+    if (indexNew > currentIndex ) {
+      this.shouldChange = true;
+      this.startAnimation("slideLeft")
+    } else if(indexNew < currentIndex ) {
+      this.shouldChange = true;
+      this.startAnimation("slideRight")
+    }
+   
+
+    this.changeSwipeControlColorToWhite();
+
+    this.currentCategory.possibleCategroyIndex = indexNew;
+    this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
+    this.changeSwipeControlColorToBlue();
+    this.getChipData();
+
+  }
 
 
   // makes the currentCategory.possibleCategroyIndex the next index of POSSIBLE_CATEGORYS; 
@@ -345,14 +433,18 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   // gets the new set of chips
 
   onRight() {
+    this.changeSwipeControlColorToWhite();
+
     if (this.currentCategory.possibleCategroyIndex < POSSIBLE_CATEGROYS.length - 1) {
       this.currentCategory.possibleCategroyIndex += 1;
       this.currentEmotionIndex +=1
     } else {
       this.currentCategory.possibleCategroyIndex = 0;
-      this.currentEmotionIndex = 0
+      this.currentEmotionIndex = 0 
 
     }
+    this.changeSwipeControlColorToBlue();
+
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
   }
@@ -362,17 +454,40 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
   // sets the categoryName of currentCategory to the POSSIBLE_CATEGORYS index using the possibleCategoryIndex
   // gets the new set of chips
   onLeft() {
+
+    this.changeSwipeControlColorToWhite();
+
+ 
     if (this.currentCategory.possibleCategroyIndex > 0) {
-      this.currentCategory.possibleCategroyIndex -= 1;
-      this.currentEmotionIndex -= 1;
+      this.currentCategory.possibleCategroyIndex -= 1;  
 
     } else {
       this.currentCategory.possibleCategroyIndex = POSSIBLE_CATEGROYS.length - 1;
       this.currentEmotionIndex =  POSSIBLE_CATEGROYS.length - 1;
 
     }
+    
+    this.changeSwipeControlColorToBlue();
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
+
     this.getChipData();
+  }
+
+
+  changeSwipeControlColorToBlue() {
+    let parentDiv = document.getElementById("swipeControls");
+    let children = parentDiv.children as HTMLCollectionOf<HTMLElement>;
+    let iconToChange = children[this.currentCategory.possibleCategroyIndex] ;
+    iconToChange.style.color = "#68BCD8";
+    iconToChange.style.backgroundColor  = "#68BCD8"
+  }
+
+  changeSwipeControlColorToWhite() {
+    let parentDiv = document.getElementById("swipeControls");
+    let children = parentDiv.children as HTMLCollectionOf<HTMLElement>;
+    let iconToChange = children[this.currentCategory.possibleCategroyIndex];
+    iconToChange.style.color = "#FFFFFF";
+    iconToChange.style.backgroundColor = "#FFFFFF"
   }
 
 
@@ -398,11 +513,28 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
       case "AFSCHUW":
         this.chipData = this.convertEnumToArray(afschuw);
         break;
+      case "ANDERS":
+        this.chipData = this.fillAnders();
     }
     this.ref.detectChanges();
     this.initChips();
   }
 
+
+  fillAnders() {
+
+    let emotionArray = [];
+    this.newAnders.forEach(anders => {
+      let temp = {
+        emotionName: anders,
+        chipState: false
+      };
+      emotionArray.push(temp)
+    })
+ 
+    return emotionArray;
+
+  }
 
   // returns  an array filled with the avaiable emotions as strings
   convertEnumToArray(enumObject: Object) {
@@ -417,6 +549,21 @@ export class EmotionSelectionComponent implements OnInit, OnChanges {
       }
     }
     return emotionArray;
+  }
+
+
+
+  addToAnders(emotionName: string) {
+    if (emotionName != '') {
+      let temp = {
+        emotionName: emotionName,
+        chipState: false
+      };
+      this.newAnders.push(temp);
+
+    }
+  let input = document.getElementById("andersInput") as HTMLInputElement;
+    input.value = ''
   }
   showOther(event) {
     this.other = !this.other;

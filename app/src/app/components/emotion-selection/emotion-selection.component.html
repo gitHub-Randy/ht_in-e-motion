@@ -9,7 +9,7 @@
 </div>
 <div class="carrousel">
 
-    <button mat-icon-button (click)="onLeft()" id="leftBtn">
+    <button mat-icon-button (click)="goToIndex(currentCategory.possibleCategroyIndex-1)" id="leftBtn">
         <mat-icon id="categoryArrow">keyboard_arrow_left</mat-icon>
     </button>
     <div class="selection" [@emotionTrigger]="animationState" (@emotionTrigger.done)="resetAnimationState()"
@@ -33,7 +33,8 @@
 
         <div class="chipDiv">
             <mat-chip-list multiple [selectable]="true">
-                <div class="gridContainer" aria-label="emotion selection">
+                <div class="gridContainer" aria-label="emotion selection"
+                    *ngIf="currentCategory.categoryName != 'ANDERS' else anders">
                     <mat-chip *ngFor="let emotion of chipData; index as i" class="gridItem-{{i}}"
                         id="{{emotion.emotionName}}" (click)="selectedEmotion($event.target)">
 
@@ -61,33 +62,53 @@
 
     </div>
 
-    <button mat-icon-button (click)="onRight()" id="rightBtn">
+    <button mat-icon-button (click)="goToIndex(currentCategory.possibleCategroyIndex+1)" id="rightBtn">
         <mat-icon id="categoryArrow">keyboard_arrow_right</mat-icon>
     </button>
 
 
 </div>
 
-<div class="swipeControls">
-    <mat-icon>lens</mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
-    <mat-icon>panorama_fish_eye
-    </mat-icon>
+<div class="swipeControls" id="swipeControls">
+    <mat-icon id="swipeCircle" style="color: #68BCD8;background-color: #68BCD8;" (click)="goToIndex(0)">lens</mat-icon>
+    <mat-icon id="swipeCircle" style="color: #FFFFFF; background-color: #FFFFFF;" (click)="goToIndex(1)">lens</mat-icon>
+    <mat-icon id="swipeCircle" style="color: #FFFFFF;background-color: #FFFFFF;" (click)="goToIndex(2)">lens</mat-icon>
+    <mat-icon id="swipeCircle" style="color: #FFFFFF;background-color: #FFFFFF;" (click)="goToIndex(3)">lens</mat-icon>
+    <mat-icon id="swipeCircle" style="color: #FFFFFF;background-color: #FFFFFF;" (click)="goToIndex(4)">lens</mat-icon>
+    <mat-icon id="swipeCircle" style="color: #FFFFFF;background-color: #FFFFFF;" (click)="goToIndex(5)">lens</mat-icon>
+    <mat-icon id="swipeCircle" style="color: #FFFFFF;background-color: #FFFFFF;" (click)="goToIndex(6)">lens</mat-icon>
+
 
 </div>
 
 <div class="bottom-bar">
-    <div class="prev">
-        <button mat-fab class="prevButton"><img src="../../../assets/icons/prev.png"></button> Vorige
-    </div>
-    <div class="next" *ngIf="chosenEmotions.length != 0">
-        <button mat-fab class="nextButton" (click)="sendEmotions()" ><img src="../../../assets/icons/next.png"></button> Volgende
+   
+    <div class="next">
+        <button mat-fab class="nextButton"><img src="../../../assets/icons/next.png"></button> Volgende
     </div>
 </div>
+
+
+
+<ng-template #anders>
+    <div class="flexContainer">
+        <div class="addEmotion">
+            <input id="andersInput" name="andersInput" class="andersInput" placeholder="Typ hier je emotie in" type="text"
+                (change)="addToAnders($event.target.value)">
+
+        </div>
+        <div class="FlexItems">
+
+            <mat-chip *ngFor="let a of newAnders; index as i" id="{{a.emotionName}}"
+                (click)="selectedEmotion($event.target)">
+
+
+                {{a.emotionName}}
+                <mat-icon matChipRemove id="{{a.emotionName}}" *ngIf="a.chipState == true"
+                    style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event)">cancel</mat-icon>
+
+            </mat-chip>
+         
+        </div>
+    </div>
+</ng-template>

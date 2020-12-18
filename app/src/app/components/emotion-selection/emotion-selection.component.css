@@ -1,3 +1,22 @@
+
+.andersInput{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  color: black;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 22px;
+  border: none;
+  width: max-content;
+}
+
+.andersInput, textarea{
+  background-color: #ffffff
+  ;
+}
+
+input[type=text]:focus{
+  outline: none;     /* oranges! yey */
+}
 .carrousel{
   display: flex;
   flex-direction: row;
@@ -16,6 +35,15 @@
   height: 200px;
   border-radius: 0px 10px 10px 0px; /* top left, top right, bottom right, bottom left */
   padding-left: 0;
+}
+
+#swipeCircle{
+  box-shadow: 0px 3px 5px  rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+  margin: 4px;
+  width: 10px;
+  height: 10px;
+  font-size: 10px;
 }
 
 #rightBtn{
@@ -72,7 +100,7 @@ p {
   
   border-radius: 10px;
   width: 95%;
-  height: 150px;
+  height: 165px;
 }
 
 .other {
@@ -135,46 +163,107 @@ justify-content: center;
 
 /* chips */
 .mat-chip {
+  /* display: flex; */
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   color: black;
   background-color: #ffffff;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.16);
   border-radius: 22px;
-  width: 120px;
+  font-size: 13px;
+   /* max-width: 95%; */
+  /* min-width: 95%;  */
+  /* min-width: -webkit-fill-available; */
+  /* height: 30px; */
+
+  /* padding-top: 2px; */
 }
+
+
+.emotionChipName{
+  /* text-overflow: clip; */
+  font-size: 14px;
+  text-align: center;
+  margin: auto;
+  font-weight: 400;
+  max-width: 95%;
+  min-width: 95%;
+}
+
 
 .mat-standard-chip:hover::after {
   background-color: #2b4d59 !important;
   opacity: 0.2;
 }
 
+
+
+
 .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
   background-color: #2b4d59;
   color: rgb(255, 255, 255);
 }
 
+
+.flexContainer{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 160px;
+  margin-top: 5px;
+  margin-left:3px;
+  margin-right: 3px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.flexItems{
+  flex-wrap: wrap;
+  
+
+}
+
+.flex-left{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+}
+
+.flex-right{
+  display: flex;
+  flex-direction: column;
+}
+
+.addEmotion{
+  margin-left: 5px;
+}
+
 .gridContainer {
-  height: 100%;
-  width: 85%;
   margin: auto;
   margin-top: 5px;
-  /* margin-right: 7%; */
+  margin-right: 5px;
+  margin-left: 8px;
   display: grid;
-  grid-template-rows: 25px 25px 25px 25px;
-  /* grid-template-columns: 145px 0px 145px; */
+  grid-template-rows: repeat(4,30px);
+  grid-template-columns: 130px 0px 130px;
   justify-content: space-evenly;
   align-content: space-evenly;
-  gap: 10px 2px;
+  gap: 10px 0px; 
+
+  
+
 }
 
 .gridItem-0 {
-  grid-column-start: 1;
+
+
+ grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 1;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
 }
 
 .gridItem-1 {
@@ -240,10 +329,13 @@ justify-content: center;
   justify-content: center;
 }
 
+
+
 /* GIF */
 
 .scrollContainer {
   height: 173px;
+  width: 260px;
   margin-top: 4px;
 }
 ::-webkit-scrollbar {
@@ -261,15 +353,15 @@ justify-content: center;
   margin: auto;
   display: grid;
   grid-template-rows: 77px 77px 77px 77px;
-  grid-template-columns: 30px 98px;
+  /* grid-template-columns: 30px 98px; */
   justify-content: space-evenly;
   align-content: space-evenly;
-  gap: 10px 2px;
+  gap: 5px 0px;
 }
 
 #gif-0 {
-  width: 145px;
-  height: 80px;
+  width: 120px;
+  height: 75px;
   border-radius: 10px;
   border: 2px solid rgb(255, 255, 255);
   grid-column-start: 1;
@@ -281,8 +373,8 @@ justify-content: center;
 }
 
 #gif-1 {
-  width: 145px;
-  height: 80px;
+  width: 120px;
+  height: 75px;
   border-radius: 10px;
 
   border: 2px solid rgb(255, 255, 255);
@@ -295,8 +387,8 @@ justify-content: center;
 }
 
 #gif-2 {
-  width: 145px;
-  height: 80px;
+  width: 120px;
+  height: 75px;
   border-radius: 10px;
   border: 2px solid rgb(255, 255, 255);
 
@@ -309,8 +401,8 @@ justify-content: center;
 }
 
 #gif-3 {
-  width: 145px;
-  height: 80px;
+  width: 120px;
+  height: 75px;
   border-radius: 10px;
   border: 2px solid rgb(255, 255, 255);
 
@@ -323,8 +415,8 @@ justify-content: center;
 }
 
 #gif-4 {
-  width: 145px;
-  height: 80px;
+  width: 120px;
+  height: 75px;
   border-radius: 10px;
   border: 2px solid rgb(255, 255, 255);
 
@@ -337,8 +429,8 @@ justify-content: center;
 }
 
 #gif-5 {
-  width: 145px;
-  height: 80px;
+  width: 120px;
+  height: 75px;
   border-radius: 10px;
   border: 2px solid rgb(255, 255, 255);
 
@@ -351,8 +443,8 @@ justify-content: center;
 }
 
 #gif-6 {
-  width: 145px;
-  height: 80px;
+  width: 120px;
+  height: 75px;
   border-radius: 10px;
   border: 2px solid rgb(255, 255, 255);
 
@@ -365,8 +457,8 @@ justify-content: center;
 }
 
 #gif-7 {
-  width: 145px;
-  height: 80px;
+  width: 120px;
+  height: 75px;
   border-radius: 10px;
   border-style: solid;
   border: 2px solid rgb(255, 255, 255);

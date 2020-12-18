@@ -9,4 +9,4 @@ const User = mongoose.model(
   })
 );
 
-module.exports = ChosenEmotion;
+module.exports = User;
