@@ -31,6 +31,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DescriptionComponent } from './components/emotion-strengths/description/description.component';
 import { Onboarding4Component } from './components/onboarding/onboarding4/onboarding4.component';
+import { HelpPopUpComponent } from './components/emotion-strengths/help-pop-up/help-pop-up.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -48,6 +50,7 @@ import { Onboarding4Component } from './components/onboarding/onboarding4/onboar
     Onboarding3Component,
     DescriptionComponent,
     Onboarding4Component,
+    HelpPopUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { Onboarding4Component } from './components/onboarding/onboarding4/onboar
     MatListModule,
     HammerModule,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

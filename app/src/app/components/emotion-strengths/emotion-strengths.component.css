@@ -186,3 +186,15 @@
     padding: 24px;
     overflow-y: hidden;
 }
+
+/* help pop-up */
+::ng-deep .help-panel {
+    margin-top: 32% !important;
+}
+
+::ng-deep .help-panel .mat-dialog-container{
+  border-radius: 18px;
+  padding: 24px;
+  overflow-y: hidden;
+}
+

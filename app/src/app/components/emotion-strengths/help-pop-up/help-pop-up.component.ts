@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-description',
-  templateUrl: './description.component.html',
-  styleUrls: ['./description.component.css']
+  selector: 'app-help-pop-up',
+  templateUrl: './help-pop-up.component.html',
+  styleUrls: ['./help-pop-up.component.css']
 })
-export class DescriptionComponent implements OnInit {
-  
-  constructor( public dialogRef: MatDialogRef<DescriptionComponent>) {}
+export class HelpPopUpComponent implements OnInit {
+
+  constructor(public dialogRef: MatDialogRef<HelpPopUpComponent>) { }
 
   ngOnInit(): void {
   }
@@ -21,5 +21,4 @@ export class DescriptionComponent implements OnInit {
     this.dialogRef.close();
 
   }
-
 }

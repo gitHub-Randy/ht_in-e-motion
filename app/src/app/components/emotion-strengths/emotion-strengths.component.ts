@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
 import { MatDialog } from '@angular/material/dialog';
 import { DescriptionComponent } from './description/description.component';
+import { HelpPopUpComponent } from './help-pop-up/help-pop-up.component';
 
 
 
@@ -19,7 +20,7 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   chosenEmotions: choosenEmotions[] = [];
   currentIndex: number = 0;
 
-  constructor(private router: Router, private dialog: MatDialog) {
+  constructor(private router: Router, private description: MatDialog, private help: MatDialog) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {chosenEmotions: choosenEmotions[]};
     this.chosenEmotions = state.chosenEmotions;
@@ -28,17 +29,12 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
     this.setT();
-    this.dialog.open(DescriptionComponent, {
-      maxWidth: '85vw',
-      height: '390px',
-      width: '600px',
-    })
+    this.showHelp();
   }
 
   ngOnInit(): void {
     this.setbg();
     this.setT();
-   
   }
 
   onLeft(){
@@ -60,7 +56,7 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
 
 
   describe(){
-    let dialogRef = this.dialog.open(DescriptionComponent, {
+    let dialogRef = this.description.open(DescriptionComponent, {
       maxWidth: '85vw',
       height: '390px',
       width: '600px',
@@ -68,6 +64,14 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     });
   }
 
+  showHelp(){
+    this.help.open(HelpPopUpComponent, {
+      maxWidth: '85vw',
+      height: '390px',
+      width: '600px',
+      panelClass: 'help-panel'
+    })
+  }
 
   setbg() {
     let doc = document.getElementById('html');
