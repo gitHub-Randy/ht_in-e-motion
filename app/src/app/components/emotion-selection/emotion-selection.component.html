@@ -15,16 +15,6 @@
     <div class="selection" [@emotionTrigger]="animationState" (@emotionTrigger.done)="resetAnimationState()"
         (swipeRight)="startAnimation('slideRight')" (swipeLeft)="startAnimation('slideLeft')">
 
-        <mat-card class="other" *ngIf="other">
-            <mat-card-title>Anders...</mat-card-title>
-            <mat-card-content>
-                <input placeholder="beschrijf hier je gevoel">
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button (click)="otherEmotion()">OK</button>
-            </mat-card-actions>
-        </mat-card>
-
         <div class="categorySelect">
 
             <p class="categoryWord">{{currentCategory.categoryName}}</p>
@@ -82,9 +72,10 @@
 </div>
 
 <div class="bottom-bar">
-   
+
     <div class="next" *ngIf="chosenEmotions.length != 0">
-        <button mat-fab class="nextButton" (click)="sendEmotions()"><img src="../../../assets/icons/next.png"></button> Volgende
+        <button mat-fab class="nextButton" (click)="sendEmotions()"><img src="../../../assets/icons/next.png"></button>
+        Volgende
     </div>
 </div>
 
@@ -93,13 +84,12 @@
 <ng-template #anders>
     <div class="flexContainer">
         <div class="addEmotion">
-            <input id="andersInput" name="andersInput" class="andersInput" placeholder="Typ hier je emotie in" type="text"
-                (change)="addToAnders($event.target.value)">
+            <input id="andersInput" name="andersInput" class="andersInput" placeholder="Typ hier je emotie in"
+                type="text" (change)="addToAnders($event.target.value)">
 
         </div>
         <div class="FlexItems">
-
-            <mat-chip *ngFor="let a of newAnders; index as i" id="{{a.emotionName}}"
+            <mat-chip *ngFor="let a of chipData; index as i" id="{{a.emotionName}}"
                 (click)="selectedEmotion($event.target)">
 
 
@@ -108,7 +98,8 @@
                     style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event)">cancel</mat-icon>
 
             </mat-chip>
-         
+
+
         </div>
     </div>
 </ng-template>

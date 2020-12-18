@@ -9,12 +9,16 @@ module.exports = {
     },
 
     create(req, res) {
-        let newAnders = new Anders({
-            emotionName: req.body.emotionName
+        console.log(req.body)
+        let data = req.body;
+        data.forEach(newEmotion => {
+            let newAnders = new Anders({
+                emotionName: newEmotion.emotionName
+            });
+            newAnders.save().then(data => {
+            })
         });
-        newAnders.save().then(data => {
-            return res.send(data);
-        })
+        return res.send(data);        
     },
 
     update(req, res) {
@@ -30,6 +34,8 @@ module.exports = {
         Anders.findByIdAndDelete(req.params.id).then(data => {
             return res.send(data)
         })
-    }
+    },
+
+  
 }
 

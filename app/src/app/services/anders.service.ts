@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
-const API_URL = 'https://localhost:8080/emotion/anders/';
+const API_URL = 'http://localhost:8080/emotion/anders';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -17,13 +17,14 @@ export class AndersService {
   constructor(private http: HttpClient) { }
 
 
-  addAndersChipData(emotionName: String, userId: string): Observable<any>{
+  addAndersChipData(newEmotions: Object): Observable<any>{
+    console.log(newEmotions)
 
-    return this.http.post(`${API_URL}`,emotionName, httpOptions)
+    return this.http.post(`${API_URL}`,newEmotions, httpOptions)
 
   }
 
-  getAndersChipData() {
+  getAndersChipData(): Observable<any> {
     return this.http.get(API_URL, httpOptions);
   }
 
