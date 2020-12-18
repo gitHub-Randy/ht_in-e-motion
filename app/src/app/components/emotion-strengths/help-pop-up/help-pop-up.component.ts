@@ -8,6 +8,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class HelpPopUpComponent implements OnInit {
 
+  checked: Boolean = false;
+
   constructor(public dialogRef: MatDialogRef<HelpPopUpComponent>) { }
 
   ngOnInit(): void {
@@ -19,6 +21,13 @@ export class HelpPopUpComponent implements OnInit {
 
   ok(){
     this.dialogRef.close();
+    let check = "" + this.checked; 
+    localStorage.setItem('checkedStrengthDialog', check);
+  }
 
+  onCheck(){
+    this.checked =!this.checked;
+    console.log(this.checked);
+   
   }
 }

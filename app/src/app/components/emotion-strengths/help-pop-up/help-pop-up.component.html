@@ -10,7 +10,7 @@
     </p>
     <div class="bottom">
         <div class="checkbox">
-            <mat-checkbox>Niet meer weergeven</mat-checkbox>
+            <mat-checkbox ([ngModel])="checked" (change)="onCheck()">Niet meer weergeven</mat-checkbox>
         </div>
         <div class="ok">
             <button class="okButton" (click)="ok()">OK</button>

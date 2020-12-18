@@ -29,7 +29,9 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
     this.setT();
-    this.showHelp();
+    if(localStorage.getItem("checkedStrengthDialog") == "false" || localStorage.getItem("checkedStrengthDialog") == null) {
+      this.showHelp();
+    }
   }
 
   ngOnInit(): void {
