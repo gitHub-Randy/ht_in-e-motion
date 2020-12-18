@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-@Injectable({
-  providedIn: 'root'
-})
-  
+
+
 const API_URL = 'https://localhost:8080/emotion/anders/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
+@Injectable({
+  providedIn: 'root'
+})
+  
 export class AndersService {
 
   constructor(private http: HttpClient) { }
@@ -25,7 +28,7 @@ export class AndersService {
   }
 
   updateAndersChip(emotionName: string,newEmotionName: string) {
-    return this.http.put(API_URL, {oldEmotionName: emotionName, newEmotionName: newEmotionName}, httpOptions)
+    return this.http.put(`${API_URL}:id`, {newEmotionName: newEmotionName}, httpOptions)
   }
 
 

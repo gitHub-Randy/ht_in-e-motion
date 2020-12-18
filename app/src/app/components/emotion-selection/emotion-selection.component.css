@@ -99,8 +99,8 @@ p {
   margin: auto;
   
   border-radius: 10px;
-  width: 97%;
-  height: 150px;
+  width: 95%;
+  height: 165px;
 }
 
 .other {
@@ -163,15 +163,33 @@ justify-content: center;
 
 /* chips */
 .mat-chip {
+  /* display: flex; */
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   color: black;
   background-color: #ffffff;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.16);
   border-radius: 22px;
-  min-width: max-content;
-  /* max-width: 240px; */
+  font-size: 13px;
+   /* max-width: 95%; */
+  /* min-width: 95%;  */
+  /* min-width: -webkit-fill-available; */
+  /* height: 30px; */
+
+  /* padding-top: 2px; */
 }
+
+
+.emotionChipName{
+  /* text-overflow: clip; */
+  font-size: 14px;
+  text-align: center;
+  margin: auto;
+  font-weight: 400;
+  max-width: 95%;
+  min-width: 95%;
+}
+
 
 .mat-standard-chip:hover::after {
   background-color: #2b4d59 !important;
@@ -186,30 +204,66 @@ justify-content: center;
   color: rgb(255, 255, 255);
 }
 
-.gridContainer {
-  height: 100%;
-  max-width: 85%;
-  /* min-width: 100%; */
 
+.flexContainer{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 160px;
+  margin-top: 5px;
+  margin-left:3px;
+  margin-right: 3px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.flexItems{
+  flex-wrap: wrap;
+  
+
+}
+
+.flex-left{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+}
+
+.flex-right{
+  display: flex;
+  flex-direction: column;
+}
+
+.addEmotion{
+  margin-left: 5px;
+}
+
+.gridContainer {
   margin: auto;
   margin-top: 5px;
-  margin-right: 7%;
+  margin-right: 5px;
+  margin-left: 8px;
   display: grid;
-  grid-template-rows: 25px 25px 25px 25px;
+  grid-template-rows: repeat(4,30px);
   grid-template-columns: 130px 0px 130px;
   justify-content: space-evenly;
   align-content: space-evenly;
-  gap: 10px 0px;
+  gap: 10px 0px; 
+
+  
 
 }
 
 .gridItem-0 {
-  grid-column-start: 1;
+
+
+ grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 1;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
 }
 
 .gridItem-1 {
@@ -275,10 +329,13 @@ justify-content: center;
   justify-content: center;
 }
 
+
+
 /* GIF */
 
 .scrollContainer {
   height: 173px;
+  width: 260px;
   margin-top: 4px;
 }
 ::-webkit-scrollbar {

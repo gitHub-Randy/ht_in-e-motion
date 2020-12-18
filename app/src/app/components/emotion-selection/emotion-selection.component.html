@@ -32,16 +32,18 @@
         </div>
 
         <div class="chipDiv">
-            <mat-chip-list multiple [selectable]="true" >
-                <div class="gridContainer" aria-label="emotion selection">
+            <mat-chip-list multiple [selectable]="true">
+                <div class="gridContainer" aria-label="emotion selection"
+                    *ngIf="currentCategory.categoryName != 'ANDERS' else anders">
                     <mat-chip *ngFor="let emotion of chipData; index as i" class="gridItem-{{i}}"
                         id="{{emotion.emotionName}}" (click)="selectedEmotion($event.target)">
-                       {{emotion.emotionName}}
+
+
+                        {{emotion.emotionName}}
                         <mat-icon matChipRemove id="{{emotion.emotionName}}" *ngIf="emotion.chipState == true"
                             style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event)">cancel</mat-icon>
 
                     </mat-chip>
-                        <input class="andersInput" *ngIf="currentCategory.categoryName == 'ANDERS' " placeholder="Typ hier je emotie in" type="text"  (change)="showGifs($event.target.value)">
                 </div>
             </mat-chip-list>
         </div>
@@ -87,3 +89,28 @@
         <button mat-fab class="nextButton"><img src="../../../assets/icons/next.png"></button> Volgende
     </div>
 </div>
+
+
+
+<ng-template #anders>
+    <div class="flexContainer">
+        <div class="addEmotion">
+            <input id="andersInput" name="andersInput" class="andersInput" placeholder="Typ hier je emotie in" type="text"
+                (change)="addToAnders($event.target.value)">
+
+        </div>
+        <div class="FlexItems">
+
+            <mat-chip *ngFor="let a of newAnders; index as i" id="{{a.emotionName}}"
+                (click)="selectedEmotion($event.target)">
+
+
+                {{a.emotionName}}
+                <mat-icon matChipRemove id="{{a.emotionName}}" *ngIf="a.chipState == true"
+                    style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event)">cancel</mat-icon>
+
+            </mat-chip>
+         
+        </div>
+    </div>
+</ng-template>

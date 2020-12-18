@@ -16,6 +16,12 @@ var corsOptions = {
   origin: '*'
 };
 
+//routes
+
+const anders = require('./routes/anders');
+
+
+
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
@@ -48,6 +54,9 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Health-thing API." });
 });
+
+
+app.use("/", anders);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
