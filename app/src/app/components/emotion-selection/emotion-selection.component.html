@@ -84,7 +84,7 @@
 <div class="bottom-bar">
    
     <div class="next" *ngIf="chosenEmotions.length != 0">
-        <button mat-fab class="nextButton"><img src="../../../assets/icons/next.png"></button> Volgende
+        <button mat-fab class="nextButton" (click)="sendEmotions()"><img src="../../../assets/icons/next.png"></button> Volgende
     </div>
 </div>
 
