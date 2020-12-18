@@ -2,26 +2,32 @@
         <app-header></app-header>
         <div class='content'>
             <h3>HOE STERK ZIJN DEZE <br> GEVOELENS?</h3>
-            <p>
-                Geef dit aan met de schuifbalk!
-            </p>
-            <div class="card">
-                <h3>Gevoel</h3>
-                <div class="gif">
-
+            <div class="carrousel">
+                <button mat-icon-button (click)="onLeft()" id="leftBtn">
+                    <mat-icon id="categoryArrow">keyboard_arrow_left</mat-icon>
+                </button> 
+                <div class="card">
+                    <h3>{{chosenEmotions[currentIndex].emotionName}}</h3>
+                    <div class="gif">
+                        <img src={{chosenEmotions[currentIndex].gif}}>
+                    </div>
+                    <div class="slider">
+                            <mat-slider>loading</mat-slider>
+                    </div>
+                    <div class="describe">
+                        <button mat-fab class="desButton" (click)="describe()"><img src="../../../assets/icons/editIcon.png"></button> Beschrijven
+                    </div>
                 </div>
-                <div class="slider">
-
-                </div>
+                <button mat-icon-button (click)="onRight()" id="rightBtn">
+                    <mat-icon id="categoryArrow">keyboard_arrow_right</mat-icon>
+                </button>
             </div>
         </div>
         <div class="bottom-bar">
             <div class="prev">
-                <button mat-fab class="prevButton"><img src="../../../assets/icons/prev.png"></button> Vorige
+                <button mat-fab class="prevButton" (click)="prevpage()"><img src="../../../assets/icons/prev.png"></button> Vorige
             </div>
-            <div class="describe">
-                <button mat-fab class="desButton"><img src="../../../assets/icons/editIcon.png"></button> Beschrijven
-            </div>
+          
             <div class="next">
                 <button mat-fab class="nextButton"><img src="../../../assets/icons/next.png"></button> Volgende
             </div>

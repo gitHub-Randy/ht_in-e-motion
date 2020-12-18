@@ -87,7 +87,7 @@
     <div class="prev">
         <button mat-fab class="prevButton"><img src="../../../assets/icons/prev.png"></button> Vorige
     </div>
-    <div class="next">
-        <button mat-fab class="nextButton"><img src="../../../assets/icons/next.png"></button> Volgende
+    <div class="next" *ngIf="chosenEmotions.length != 0">
+        <button mat-fab class="nextButton" (click)="sendEmotions()" ><img src="../../../assets/icons/next.png"></button> Volgende
     </div>
 </div>

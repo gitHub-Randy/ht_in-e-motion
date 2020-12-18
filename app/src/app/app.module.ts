@@ -27,6 +27,12 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { HammerModule} from '@angular/platform-browser';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DescriptionComponent } from './components/emotion-strengths/description/description.component';
+import { Onboarding4Component } from './components/onboarding/onboarding4/onboarding4.component';
+import { HelpPopUpComponent } from './components/emotion-strengths/help-pop-up/help-pop-up.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -42,6 +48,9 @@ import { HammerModule} from '@angular/platform-browser';
     Onboarding1Component,
     Onboarding2Component,
     Onboarding3Component,
+    DescriptionComponent,
+    Onboarding4Component,
+    HelpPopUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +68,10 @@ import { HammerModule} from '@angular/platform-browser';
     LayoutModule,
     MatToolbarModule,
     MatListModule,
-    HammerModule
+    HammerModule,
+    MatSliderModule,
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
