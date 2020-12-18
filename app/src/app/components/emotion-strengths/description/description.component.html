@@ -1,8 +1,22 @@
+<div class="close">
+    <button class="closeButton" (click)="close()"> 
+        <mat-icon id="closeIcon">close</mat-icon>
+    </button>
+</div>
+
 <mat-form-field 
         floatLabel='never'>
         <mat-label>ik voel me gelukkig omdat...</mat-label>
-            <input  matInput  
+            <textarea  matInput  
             placeholder="ik voel me gelukkig omdat..." 
-            autocomplete="off">
-  
+            autocomplete="off"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="12"
+            cdkAutosizeMaxRows="12"
+            maxlength="260"> 
+            </textarea>
 </mat-form-field>
+<div class="ok">
+    <button class="okButton" (click)="ok()">OK</button>
+</div>

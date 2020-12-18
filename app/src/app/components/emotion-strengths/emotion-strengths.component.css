@@ -176,11 +176,13 @@
     transform: none !important;
   } 
   
+  /*Describe pop-up  */
 ::ng-deep .describe-panel {
-      margin-top: 35% !important;
+      margin-top: 32% !important;
   }
 
 ::ng-deep .describe-panel .mat-dialog-container{
     border-radius: 18px;
-
+    padding: 24px;
+    overflow-y: hidden;
 }

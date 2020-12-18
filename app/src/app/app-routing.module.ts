@@ -12,6 +12,7 @@ import { Onboarding4Component } from './components/onboarding/onboarding4/onboar
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/onboarding', pathMatch: 'full' },
   { path: "emotions",  component:EmotionSelectionComponent},
   { path: "emotions/strengths",  component:EmotionStrengthsComponent},
   { path: "emotions/description",  component:EmotionDescriptionComponent},

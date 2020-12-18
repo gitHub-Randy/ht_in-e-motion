@@ -28,11 +28,17 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
     this.setT();
+    this.dialog.open(DescriptionComponent, {
+      maxWidth: '85vw',
+      height: '390px',
+      width: '600px',
+    })
   }
 
   ngOnInit(): void {
     this.setbg();
     this.setT();
+   
   }
 
   onLeft(){
