@@ -86,10 +86,26 @@
     text-align: center;
 }
 
+.swipeControls{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+  justify-content: center;
+  }
+
+  #swipeCircle{
+    box-shadow: 0px 3px 5px  rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+    margin: 4px;
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+  }
+
 .bottom-bar{
     display: grid;
     justify-content: space-between;
-    margin: 17% 7% auto 7%;
+    margin: 10% 7% auto 7%;
   }
   
 .prev{
@@ -195,6 +211,17 @@
 ::ng-deep .help-panel .mat-dialog-container{
   border-radius: 18px;
   padding: 24px;
+  overflow-y: hidden;
+}
+
+/* help pop-up 2*/
+::ng-deep .help-panel2 {
+    margin-top: 32% !important;
+}
+
+::ng-deep .help-panel2 .mat-dialog-container{
+  border-radius: 18px;
+  padding: 24px 12px;
   overflow-y: hidden;
 }
 
