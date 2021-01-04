@@ -32,6 +32,11 @@ export class AndersService {
     return this.http.put(`${API_URL}:id`, {newEmotionName: newEmotionName}, httpOptions)
   }
 
+  deleteAndersChip(emotionName: String): Observable<any> {
+    console.log("delete Service")
+    return this.http.delete(`${API_URL}/${emotionName}`, httpOptions)
+
+  }
 
 }
 

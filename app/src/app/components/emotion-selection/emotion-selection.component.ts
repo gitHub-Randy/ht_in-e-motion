@@ -74,6 +74,8 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
   newAnders: chipData[] = [];
 
+  canDeleteOther: boolean = false
+
   //#endregion
 
   //#region  init methods
@@ -133,8 +135,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
     }
     this.ref.detectChanges();
     this.initChips();
-    console.log("chipData", this.chipData)
-    console.log("chosenEmoteons", this.chosenEmotions)
+
   }
 
 
@@ -197,9 +198,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
   }
 
   initChips() {
-    console.log("here")
     let lastEmotion = null;
-    console.log(this.chipData.length)
     this.chipData.forEach(data => {
       this.chosenEmotions.forEach(emotion => {
 
@@ -267,6 +266,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
     }
 
     let tempurrentChip = document.getElementById(event.target.id);
+
     this.selectedEmotion(tempurrentChip);
 
 
@@ -297,7 +297,6 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
   }
   makeOldChipNotPreselected() {
-    console.log("currentChip", this.currentChip)
     if (this.currentChip != null && this.currentChipBelongsToCurrentChipSet()) {
 
       let oldChip = document.getElementById(this.currentChip.emotionName);
@@ -329,7 +328,6 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
   }
 
   currentChipBelongsToCurrentChipSet() {
-    console.log("yeet3")
     let currentChipIsInCurrentChipSet = false;
     this.chipData.forEach(data => {
       if (data.emotionName == this.currentChip.emotionName) {
@@ -341,7 +339,10 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
   }
 
   selectedEmotion(chip: any) {
-
+    
+    if (this.currentCategory.categoryName == "ANDERS") {
+      this.canDeleteOther = true
+    }
     let emotionChip: HTMLElement = chip;
     if (!this.checkIfSelectedEmotionIsNew(emotionChip)) {
       this.makeChipPreselected(emotionChip)
@@ -425,7 +426,11 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
       this.greyOutNotSelectedGifs(event)
       this.addToChosenGifs(event)
       this.makeChipSelected();
+      if (this.currentCategory.categoryName == "ANDERS") {
+        this.canDeleteOther = false
+      }
     }
+   
 
   }
 
@@ -579,7 +584,6 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
   addToAnders(emotionName: string) {
 
     this.andersService.addAndersChipData([{ emotionName: emotionName }]).toPromise().then(data => {
-      console.log("added Data", data)
       if (emotionName != '') {
         let temp = {
           emotionName: emotionName,
@@ -610,6 +614,16 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
   sendEmotions() {
     this.saveAndersInDB()
   }
+
+
+  deleteOtherEmotion() {
+    this.andersService.deleteAndersChip(this.currentEmotion).toPromise().then(data => {
+      console.log(data)
+      this.getChipData();
+
+    });
+  }
+
 }
 
 

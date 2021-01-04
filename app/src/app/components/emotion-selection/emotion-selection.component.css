@@ -28,6 +28,12 @@ input[type=text]:focus{
   line-height: 0%;
   margin-left: 5px;
 }
+
+
+
+#deleteBtn:disabled {
+  background-color:  #f5d4d7 !important;
+}
 .carrousel{
   display: flex;
   flex-direction: row;
@@ -482,4 +488,6 @@ justify-content: center;
   display: flex;
   justify-content: center;
 }
+
+
 

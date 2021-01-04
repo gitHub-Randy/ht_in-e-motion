@@ -31,7 +31,8 @@ module.exports = {
     },
 
     destroy(req, res) {
-        Anders.findByIdAndDelete(req.params.id).then(data => {
+        console.log("destroy anders")
+        Anders.findOneAndDelete({ emotionName: req.params.emotionName }).then(data => {
             return res.send(data)
         })
     },
