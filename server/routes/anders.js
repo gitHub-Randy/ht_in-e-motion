@@ -5,6 +5,6 @@ const andersController = require('../controllers/andersController');
 router.get('/emotion/anders', andersController.getAll);
 router.post('/emotion/anders', andersController.create);
 router.put('/emotion/anders/:id', andersController.update);
-router.delete('/emotion/anders/:id', andersController.destroy)
+router.delete('/emotion/anders/:emotionName', andersController.destroy)
 // router.get('/emotion/anders',andersController.test)
 module.exports = router;
