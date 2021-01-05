@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DescriptionComponent } from './description/description.component';
 import { HelpPopUpComponent } from './help-pop-up/help-pop-up.component';
 import { trigger, keyframes, animate, transition, sequence, stagger, query } from '@angular/animations'
 import * as kf from '../emotion-selection/keyframes';
 import 'hammerjs';
 import { HelpPopUp2Component } from './help-pop-up2/help-pop-up2.component';
+import { EmotionService } from '../../services/emotion.service';
 
 
 
@@ -52,7 +53,8 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   shouldChange: boolean = false;
 
 
-  constructor(private router: Router, private description: MatDialog, private help: MatDialog, private help2: MatDialog) {
+
+  constructor(private router: Router, private description: MatDialog, private help: MatDialog, private help2: MatDialog, private EmotionService: EmotionService) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {chosenEmotions: choosenEmotions[]};
     this.chosenEmotions = state.chosenEmotions;
@@ -67,7 +69,7 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     if(localStorage.getItem("checkedStrengthDialog") == "false" || localStorage.getItem("checkedStrengthDialog") == null) {
       this.showHelp();
     }
-   
+
   }
 
   ngOnInit(): void {
@@ -106,8 +108,18 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
       maxWidth: '85vw',
       height: '390px',
       width: '600px',
-      panelClass: 'describe-panel'
+      panelClass: 'describe-panel',
+      data: {
+        emotion: this.chosenEmotions[this.currentIndex]
+      },
     });
+
+    dialogRef.afterClosed().subscribe( res => {
+      console.log("Dialog description " + res.data);
+      this.chosenEmotions[this.currentIndex].description = res.data;
+      console.log("New Descriptions " + this.chosenEmotions[this.currentIndex].description);
+    });
+    
   }
 
   showHelp(){
@@ -144,6 +156,10 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     this.router.navigateByUrl('emotions');
   }
 
+  next(){
+    this.saveEmotions();
+  }
+
   changeSwipeControlColorToYellow() {
     let parentDiv = document.getElementById("swipeControls");
     let children = parentDiv.children as HTMLCollectionOf<HTMLElement>;
@@ -167,8 +183,6 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     }
 
   }
-
-
 
   resetAnimationState() {
     console.log(this.animationState)
@@ -203,14 +217,37 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
       this.shouldChange = true;
       this.startAnimation("slideRight")
     }
-   
 
     this.changeSwipeControlColorToWhite();
 
     this.currentIndex = indexNew;
     
     this.changeSwipeControlColorToYellow();
+  }
 
+  getValue(event) {
+    this.chosenEmotions[this.currentIndex].strength = event.value;
+    console.log(this.chosenEmotions[this.currentIndex].strength);
+  }
+
+  saveEmotions() {  
+    let tempChosenEmotionIndex;
+    let tempChosenEmotionArray = [];
+
+    this.chosenEmotions.forEach(emotion =>{
+      tempChosenEmotionIndex = {
+        category: emotion.emotionCategory,
+        emotionName: emotion.emotionName,
+        strength: emotion.strength,
+        description: emotion.description,
+        gifUrl: emotion.gif,
+      }
+      tempChosenEmotionArray.push(tempChosenEmotionIndex)
+      tempChosenEmotionIndex = null
+    })
+    this.EmotionService.addNewEmotion(tempChosenEmotionArray).subscribe(data => {
+
+    });
   }
 
 }

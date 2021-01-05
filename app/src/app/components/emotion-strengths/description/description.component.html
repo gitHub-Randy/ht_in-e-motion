@@ -8,6 +8,7 @@
         floatLabel='never'>
         <mat-label>ik voel me gelukkig omdat...</mat-label>
             <textarea  matInput  
+            [(ngModel)]="description"
             placeholder="ik voel me gelukkig omdat..." 
             autocomplete="off"
             cdkTextareaAutosize
@@ -15,7 +16,7 @@
             cdkAutosizeMinRows="12"
             cdkAutosizeMaxRows="12"
             maxlength="260"> 
-            </textarea>
+            {{description}}</textarea>
 </mat-form-field>
 <div class="ok">
     <button class="okButton" (click)="ok()">OK</button>

@@ -458,7 +458,9 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
         emotionCategory: this.currentCategory.categoryName,
         emotionName: this.currentChip.emotionName,
         gif: gifURL,
-        index: parseInt(gifImageElement.id.charAt(4))
+        index: parseInt(gifImageElement.id.charAt(4)),
+        strength: 0,
+        description: ""
       })
     }
 

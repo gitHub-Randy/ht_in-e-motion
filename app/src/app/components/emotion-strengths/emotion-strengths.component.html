@@ -13,7 +13,7 @@
                         <img src={{chosenEmotions[currentIndex].gif}}>
                     </div>
                     <div class="slider">
-                            <mat-slider>loading</mat-slider>
+                            <mat-slider [(ngModel)]="chosenEmotions[currentIndex].strength" (change)="getValue($event)"t>loading</mat-slider>
                     </div>
                     <div class="describe">
                         <button mat-fab class="desButton" (click)="describe()"><img src="../../../assets/icons/editIcon.png"></button> Beschrijven
@@ -40,7 +40,7 @@
             </div>
           
             <div class="next">
-                <button mat-fab class="nextButton"><img src="../../../assets/icons/next.png"></button> Volgende
+                <button mat-fab class="nextButton" (click)="next()" ><img src="../../../assets/icons/next.png"></button> Volgende
             </div>
         </div>
     </div>

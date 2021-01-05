@@ -8,10 +8,10 @@ const ChosenEmotion = mongoose.model(
         category: String,
         emotionName: String,
         strength: Number,
+        description: String,
         gifUrl: String,
       }
     ],
-    averageDayEmotion: String,
     chosenDate: Date,
     userId: String,
   })

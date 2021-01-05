@@ -19,6 +19,7 @@ var corsOptions = {
 //routes
 
 const anders = require('./routes/anders');
+const emotion = require('./routes/emotion');
 
 
 
@@ -57,6 +58,8 @@ app.get("/", (req, res) => {
 
 
 app.use("/", anders);
+app.use("/", emotion);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

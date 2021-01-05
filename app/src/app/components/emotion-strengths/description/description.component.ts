@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
 
 @Component({
   selector: 'app-description',
@@ -8,7 +9,14 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class DescriptionComponent implements OnInit {
   
-  constructor( public dialogRef: MatDialogRef<DescriptionComponent>) {}
+  description: string;
+
+  constructor( public dialogRef: MatDialogRef<DescriptionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data) {
+      console.log(data);
+      console.log(data.emotion);
+      this.description = data.emotion.description;
+    }
 
   ngOnInit(): void {
   }
@@ -18,7 +26,7 @@ export class DescriptionComponent implements OnInit {
   }
 
   ok(){
-    this.dialogRef.close();
+    this.dialogRef.close({ event: 'close', data: this.description});
 
   }
 

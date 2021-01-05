@@ -35,6 +35,7 @@ import { HelpPopUpComponent } from './components/emotion-strengths/help-pop-up/h
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HelpPopUp2Component } from './components/emotion-strengths/help-pop-up2/help-pop-up2.component';
 import { HelpPopUp3Component } from './components/emotion-selection/help-pop-up3/help-pop-up3.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -75,7 +76,9 @@ import { HelpPopUp3Component } from './components/emotion-selection/help-pop-up3
     HammerModule,
     MatSliderModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
