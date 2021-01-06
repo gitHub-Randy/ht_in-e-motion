@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
 import { AndersService } from 'src/app/services/anders.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AfterViewInit } from '@angular/core';
-import {HelpPopUp3Component} from './help-pop-up3/help-pop-up3.component'
+import { HelpPopUp3Component } from './help-pop-up3/help-pop-up3.component'
+import { chipState } from 'src/app/interfaces/chipStates';
 @Component({
   selector: 'app-emotion-selection',
   templateUrl: './emotion-selection.component.html',
@@ -49,9 +50,9 @@ import {HelpPopUp3Component} from './help-pop-up3/help-pop-up3.component'
   ]
 })
 
-export class EmotionSelectionComponent implements OnInit,AfterViewInit {
+export class EmotionSelectionComponent implements OnInit, AfterViewInit {
 
-  constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef, private router: Router, private andersService: AndersService,private help: MatDialog) { }
+  constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef, private router: Router, private andersService: AndersService, private help: MatDialog) { }
 
   //#region  variables
   currentCategory: category;
@@ -74,7 +75,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
   newAnders: chipData[] = [];
 
-  canDeleteOther: boolean = false
+  deleteOtherDisabled: boolean = true
 
   //#endregion
 
@@ -91,15 +92,12 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    if(localStorage.getItem("checkedSelectionDialog") == "false" || localStorage.getItem("checkedSelectionDialog") == null) {
+    if (localStorage.getItem("checkedSelectionDialog") == "false" || localStorage.getItem("checkedSelectionDialog") == null) {
       this.showHelp();
     }
-  
-   
   }
 
-
-  showHelp(){
+  showHelp() {
     this.help.open(HelpPopUp3Component, {
       maxWidth: '85vw',
       height: '390px',
@@ -135,7 +133,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
     }
     this.ref.detectChanges();
     this.initChips();
-
+    console.log(this.chipData)
   }
 
 
@@ -145,22 +143,13 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
       data.forEach(element => {
         let temp = {
           emotionName: element.emotionName,
-          chipState: false
+          chipState: chipState.NONE
         };
         emotionArray.push(temp)
       });
-
-
     }).then(data => {
       return emotionArray;
-
     })
-
-
-    // })
-
-
-
   }
 
   // returns  an array filled with the avaiable emotions as strings
@@ -170,15 +159,13 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
       if (eObj.length > 1) {
         let tempObject = {
           emotionName: eObj,
-          chipState: false
+          chipState: chipState.NONE
         }
         emotionArray.push(tempObject);
       }
     }
     return emotionArray;
   }
-
-
 
   setbg() {
     let doc = document.getElementById('html');
@@ -189,7 +176,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
   initGifs() {
     this.chosenEmotions.forEach(emotion => {
-      if (this.currentEmotion == emotion.emotionName) {
+      if (this.currentChip.emotionName == emotion.emotionName) {
         let gifImageId = emotion.index;
         let test = document.getElementById(`gif-${emotion.index}`)
         this.greyOutNotSelectedGifs(test);
@@ -197,31 +184,21 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
     })
   }
 
+  // gets called after a category change
+  // hide gifs, set the states of the chips depending on chosenEmotions
   initChips() {
-    let lastEmotion = null;
+    this.hideGifs();
     this.chipData.forEach(data => {
       this.chosenEmotions.forEach(emotion => {
-
         if (emotion.emotionName == data.emotionName) {
-          this.currentChip = {
-            emotionName: data.emotionName,
-            chipState: true
-          }
-
-          this.makeChipSelected();
-          lastEmotion = data.emotionName;
-
+          data.chipState = chipState.SELECTED;
+          let chip = document.getElementById(data.emotionName);
+          chip.style.border = "0px solid #ffffff";
+          chip.style.backgroundColor = "#2B4D59";
+          chip.style.color = "#ffffff";
         }
       })
     })
-    if (lastEmotion != null) {
-
-      this.showGifs(lastEmotion);
-    } else {
-      this.hideGifs();
-
-    }
-
   }
 
 
@@ -236,152 +213,120 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
   }
 
-
   resetAnimationState() {
     if (this.animationState == "slideRight" && !this.shouldChange) {
       this.onLeft();
     }
     if (this.animationState == "slideLeft" && !this.shouldChange) {
-
       this.onRight();
     }
     this.animationState = '';
     this.shouldChange = false;
   }
 
-
   //#endregion
 
   //#region  remove
-  removeChosenEmotion(event: any) {
-    this.chosenEmotions.forEach((emotion, index) => {
-      if (emotion.emotionName == event.target.id) {
-        this.chosenEmotions.splice(index, 1);
-      }
-    })
-
-    for (let i = 0; i < this.gifSources.length; i++) {
-      let gifToRestoreOpaccity = document.getElementById(`gif-${i}`);
-      gifToRestoreOpaccity.style.filter = "opacity(100%)";
+  removeChosenEmotion(event: HTMLElement) {
+    // get chip
+    let chip = document.getElementById(event.id.substring(0, event.id.length - 2))
+    console.log(this.currentChip)
+    // if currentChip is chip to remove
+    if (this.currentChip.emotionName == chip.id) {
+      this.chosenEmotions.forEach((cEmotion, index) => {
+        if (cEmotion.emotionName == chip.id) {
+          this.chosenEmotions.splice(index, 1);
+          this.chipData.forEach(cData => {
+            if (cData.emotionName == chip.id) {
+              cData.chipState = chipState.PRESELECTED
+              this.changeColorOfChip(chip, cData);
+              this.makeAllGifsVisible();
+            }
+          })
+        }
+      })
+    } else {
+      this.chosenEmotions.forEach((cEmotion, index) => {
+        if (cEmotion.emotionName == chip.id) {
+          this.chosenEmotions.splice(index, 1);
+          this.chipData.forEach(cData => {
+            if (cData.emotionName == chip.id) {
+              cData.chipState = chipState.NONE
+              this.changeColorOfChip(chip, cData);
+            }
+          })
+        }
+      })
     }
-
-    let tempurrentChip = document.getElementById(event.target.id);
-
-    this.selectedEmotion(tempurrentChip);
-
-
-    if (this.chosenEmotions.length == 0) {
-      this.selectionComplete = false;
+    if (this.currentCategory.categoryName == "ANDERS" && this.currentChip.chipState.toString() != "SELECTED") {
+      this.deleteOtherDisabled = false;
+    } else {
+      this.deleteOtherDisabled = true
     }
-
   }
-
 
   //#endregion remove
 
   //#region Chip SELECTION 
-  makeChipPreselected(chip: any) {
-    chip.style.backgroundColor = "#ffffff";
-    chip.style.color = "#000000";
-    chip.style.border = "2px solid #67BCD9"
-    // if (this.currentCategory.categoryName != "ANDERS") {
-    this.chipData.forEach(data => {
-      if (data.emotionName == chip.id) {
-        data.chipState = false
-
-        this.makeOldChipNotPreselected();
-        this.currentChip = data;
-      }
-    })
-
-
-  }
-  makeOldChipNotPreselected() {
-    if (this.currentChip != null && this.currentChipBelongsToCurrentChipSet()) {
-
-      let oldChip = document.getElementById(this.currentChip.emotionName);
-      oldChip.style.border = "hidden"
+  changeColorOfChip(chip: HTMLElement, newChipDataObject: chipData) {
+    switch (newChipDataObject.chipState) {
+      case chipState.NONE:
+        chip.style.backgroundColor = "#FFFFFF";
+        chip.style.border = "hidden";
+        chip.style.color = "#000000";
+        break;
+      case chipState.PRESELECTED:
+        chip.style.backgroundColor = "#FFFFFF";
+        chip.style.border = "2px solid #67BCD9"
+        chip.style.color = "#000000";
+        break;
+      case chipState.SELECTED:
+        chip.style.backgroundColor = "#2B4D59";
+        chip.style.border = "hidden";
+        chip.style.color = "#FFFFFF";
+        break;
     }
   }
 
+  selectChip(chip: HTMLElement) {
 
-
-  makeChipSelected() {
-    let chip = document.getElementById(this.currentChip.emotionName);
-    chip.style.border = "0px solid #ffffff";
-    chip.style.backgroundColor = "#2B4D59";
-    chip.style.color = "#ffffff";
-
-    // if (this.currentCategory.categoryName == "ANDERS") {
-    // this.newAnders.forEach(data => {
-    //   if (data.emotionName == chip.id) {
-    //     data.chipState = true
-    //   }
-    // })
-    // } else {
-    this.chipData.forEach(data => {
-      if (data.emotionName == chip.id) {
-        data.chipState = true
+    this.chipData.forEach(cData => {
+      // if there is an old chip; find old chip and make state NONE if state is not SELECTED
+      if (this.currentChip != null) {
+        if (cData.emotionName == this.currentChip.emotionName) {
+          if (this.currentChip.chipState != chipState.SELECTED) {
+            cData.chipState = chipState.NONE
+            this.changeColorOfChip(document.getElementById(cData.emotionName), cData)
+          }
+        }
       }
     })
-    // }
-  }
 
-  currentChipBelongsToCurrentChipSet() {
-    let currentChipIsInCurrentChipSet = false;
-    this.chipData.forEach(data => {
-      if (data.emotionName == this.currentChip.emotionName) {
-        currentChipIsInCurrentChipSet = true;
+    this.chipData.forEach(cData => {
+      // find new chip and make state PRESELECTED if state is NONE; make this the currentChip
+      if (cData.emotionName == chip.id) {
+        this.currentChip = cData;
+        if (cData.chipState == chipState.NONE) {
+          cData.chipState = chipState.PRESELECTED;
+          this.changeColorOfChip(document.getElementById(cData.emotionName), cData)
+        }
+        this.showGifs(cData.emotionName)
       }
-    });
-
-    return currentChipIsInCurrentChipSet;
-  }
-
-  selectedEmotion(chip: any) {
-    
-    if (this.currentCategory.categoryName == "ANDERS") {
-      this.canDeleteOther = true
-    }
-    let emotionChip: HTMLElement = chip;
-    if (!this.checkIfSelectedEmotionIsNew(emotionChip)) {
-      this.makeChipPreselected(emotionChip)
+    })
+    if (this.currentCategory.categoryName == "ANDERS" && this.currentChip.chipState.toString() != "SELECTED") {
+      this.deleteOtherDisabled = false;
     } else {
-      this.makeOldChipNotPreselected();
+      this.deleteOtherDisabled = true
     }
-
-
-    this.currentEmotion = emotionChip.id
-    this.showGifs(emotionChip.id)
-
-
-
-  }
-
-
-  checkIfSelectedEmotionIsNew(chip: any) {
-    let chosenEmotionContainsSelectedEmotion = false;
-    this.chosenEmotions.forEach(chosen => {
-
-      if (chosen.emotionName == chip.id) {
-        chosenEmotionContainsSelectedEmotion = true;
-      }
-    })
-    return chosenEmotionContainsSelectedEmotion;
   }
 
   //#endregion Chip Selection
 
   //#region  Gif Selection
-
-
   showGifs(emotionName: string) {
     this.shouldShowGifs = true;
-
     this.getGifs(emotionName);
-
   }
-
 
   getGifs(emotionName: string) {
     this.gifSources = [];
@@ -400,86 +345,54 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
     for (let i = 0; i < this.gifSources.length; i++) {
       if (gifImageId != i) {
         let gifToGrayOut = document.getElementById(`gif-${i}`)
+        console.log(gifToGrayOut)
         gifToGrayOut.style.filter = "opacity(20%)"
       } else {
         gifImageElement.style.filter = "opacity(100%)"
       }
     }
-
   }
 
-
-  selectGif(event: any) {
-
-    if (this.checkIfSelectedGifAlreadyChosen(event)) {
-      let newGifforOldEmotion = document.getElementById(event.id);
-      this.chosenEmotions.forEach(emotion => {
-        if (emotion.gif == newGifforOldEmotion.getAttribute("src")) {
-          emotion.gif = newGifforOldEmotion.getAttribute("src");
-          this.greyOutNotSelectedGifs(newGifforOldEmotion);
-          this.makeChipSelected();
-
-        }
-      })
-
-    } else {
-      this.greyOutNotSelectedGifs(event)
-      this.addToChosenGifs(event)
-      this.makeChipSelected();
-      if (this.currentCategory.categoryName == "ANDERS") {
-        this.canDeleteOther = false
-      }
+  makeAllGifsVisible() {
+    for (let i = 0; i < this.gifSources.length; i++) {
+      let gifToMakeVisible = document.getElementById(`gif-${i}`)
+      gifToMakeVisible.style.filter = "opacity(100%)"
     }
-   
-
   }
-
-
-  checkIfSelectedGifAlreadyChosen(selectedGif: HTMLImageElement) {
-    let gifAlreadyExists = false;
+  selectGif(gifElement: HTMLImageElement) {
+    // if emotion already exist in chosen emotion
+    let emotionIsNew = false;
     this.chosenEmotions.forEach(emotion => {
-
-      if (emotion.gif == selectedGif.src) {
-        gifAlreadyExists = true;
+      if (emotion.emotionName == this.currentChip.emotionName) {
+        // update emotion
+        emotion.gif = gifElement.src;
+        emotion.index = parseInt(gifElement.id.charAt(4));
+        emotionIsNew = true;
       }
     })
-
-    return gifAlreadyExists;
-  }
-
-
-  addToChosenGifs(gifImageElement: HTMLImageElement) {
-    let gifURL = gifImageElement.src;
-    let updatedChosenEmotion = false;
-    this.chosenEmotions.forEach(emotion => {
-      if (this.currentChip.emotionName == emotion.emotionName) {
-        emotion.gif = gifURL
-        emotion.index = parseInt(gifImageElement.id.charAt(4));
-        updatedChosenEmotion = true;
-      }
-    })
-    if (!updatedChosenEmotion) {
+    // if emotion is NEW; add to chosen emotions
+    if (!emotionIsNew) {
       this.chosenEmotions.push({
-        emotionCategory: this.currentCategory.categoryName,
         emotionName: this.currentChip.emotionName,
-        gif: gifURL,
-        index: parseInt(gifImageElement.id.charAt(4)),
-        strength: 0,
-        description: ""
+        emotionCategory: this.currentCategory.categoryName,
+        gif: gifElement.src,
+        index: parseInt(gifElement.id.charAt(4)),
+        description: "",
+        strength: 0
+
       })
     }
-
-    this.selectionComplete = true;
-
-
+    this.currentChip.chipState = chipState.SELECTED
+    this.changeColorOfChip(document.getElementById(this.currentChip.emotionName), { emotionName: this.currentChip.emotionName, chipState: this.currentChip.chipState })
+    this.greyOutNotSelectedGifs(gifElement)
+    if (this.currentCategory.categoryName == "ANDERS") {
+      this.deleteOtherDisabled = true;
+    }
   }
 
   hideGifs() {
     this.shouldShowGifs = false;
   }
-
-
-
 
   //#endregion Gif Selection
 
@@ -492,7 +405,6 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
     if (indexNew < 0) {
       indexNew = POSSIBLE_CATEGROYS.length - 1
     }
-
     let currentIndex = this.currentCategory.possibleCategroyIndex;
     if (indexNew > currentIndex) {
       this.shouldChange = true;
@@ -501,10 +413,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
       this.shouldChange = true;
       this.startAnimation("slideRight")
     }
-
-
     this.changeSwipeControlColorToWhite();
-
     this.currentCategory.possibleCategroyIndex = indexNew;
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.changeSwipeControlColorToBlue();
@@ -529,9 +438,6 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
     iconToChange.style.backgroundColor = "#FFFFFF"
   }
 
-
-
-
   // makes the currentCategory.possibleCategroyIndex the next index of POSSIBLE_CATEGORYS; 
   // if possibleCategroyIndex is more then length of POSSIBLE_CATEGORYS then it sets the current index to 0 
   // sets the categoryName of currentCategory to the POSSIBLE_CATEGORYS index using the possibleCategoryIndex
@@ -539,17 +445,14 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
   onRight() {
     this.changeSwipeControlColorToWhite();
-
     if (this.currentCategory.possibleCategroyIndex < POSSIBLE_CATEGROYS.length - 1) {
       this.currentCategory.possibleCategroyIndex += 1;
       this.currentEmotionIndex += 1
     } else {
       this.currentCategory.possibleCategroyIndex = 0;
       this.currentEmotionIndex = 0
-
     }
     this.changeSwipeControlColorToBlue();
-
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
     this.getChipData();
   }
@@ -561,20 +464,14 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
   onLeft() {
 
     this.changeSwipeControlColorToWhite();
-
-
     if (this.currentCategory.possibleCategroyIndex > 0) {
       this.currentCategory.possibleCategroyIndex -= 1;
-
     } else {
       this.currentCategory.possibleCategroyIndex = POSSIBLE_CATEGROYS.length - 1;
       this.currentEmotionIndex = POSSIBLE_CATEGROYS.length - 1;
-
     }
-
     this.changeSwipeControlColorToBlue();
     this.currentCategory.categoryName = POSSIBLE_CATEGROYS[this.currentCategory.possibleCategroyIndex];
-
     this.getChipData();
   }
 
@@ -589,7 +486,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
       if (emotionName != '') {
         let temp = {
           emotionName: emotionName,
-          chipState: false
+          chipState: chipState.NONE
         };
         // this.newAnders.push(temp);
         this.chipData.push(temp)
@@ -601,7 +498,6 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
   }
 
-
   saveAndersInDB() {
     let test = this.andersService.addAndersChipData(this.newAnders).subscribe(data => {
 
@@ -610,17 +506,14 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
     });
   }
 
-
   //#endregion ANDERS
 
   sendEmotions() {
     this.saveAndersInDB()
   }
 
-
   deleteOtherEmotion() {
-    this.andersService.deleteAndersChip(this.currentEmotion).toPromise().then(data => {
-      console.log(data)
+    this.andersService.deleteAndersChip(this.currentChip.emotionName).toPromise().then(data => {
       this.getChipData();
 
     });

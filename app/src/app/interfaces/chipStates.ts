@@ -1,5 +1,5 @@
 export enum chipState{
-    "NONE",
-    "PRESELECTED",
-    "SELECTED"
+    "NONE" = "NONE",
+    "PRESELECTED"= "PRESELECTED",
+    "SELECTED"= "SELECTED"
 }

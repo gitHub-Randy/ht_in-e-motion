@@ -87,10 +87,8 @@ mat-checkbox{
 
 
   ::ng-deep .mat-dialog-container{
-      width: 88% ;
       margin: auto;
       margin-top: 12px;
-      height: 66%;
       border-radius: 10px;
 
   }
