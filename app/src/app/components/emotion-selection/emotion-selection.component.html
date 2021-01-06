@@ -6,7 +6,7 @@
 <div class="carrousel">
 
     <button mat-icon-button (click)="goToIndex(currentCategory.possibleCategroyIndex-1)" id="leftBtn">
-        <mat-icon id="categoryArrow">keyboard_arrow_left</mat-icon>
+        <mat-icon id="categoryArrowLeft">keyboard_arrow_left</mat-icon>
     </button>
     <div class="selection" [@emotionTrigger]="animationState" (@emotionTrigger.done)="resetAnimationState()"
         (swipeRight)="startAnimation('slideRight')" (swipeLeft)="startAnimation('slideLeft')">
@@ -21,21 +21,20 @@
             <mat-chip-list multiple [selectable]="true">
                 <div class="gridContainer" aria-label="emotion selection"
                     *ngIf="currentCategory.categoryName != 'ANDERS' else anders">
+
                     <mat-chip *ngFor="let emotion of chipData; index as i" class="gridItem-{{i}}"
                         id="{{emotion.emotionName}}" (click)="selectChip($event.target)">
 
 
                         {{emotion.emotionName}}
-                        <mat-icon matChipRemove id="{{emotion.emotionName}}-{{i}}" *ngIf="emotion.chipState == 'SELECTED'"
-                            style="color: white; opacity: 100%;" (click)="removeChosenEmotion($event.target)">cancel</mat-icon>
+                        <mat-icon matChipRemove id="{{emotion.emotionName}}-{{i}}"
+                            *ngIf="emotion.chipState == 'SELECTED'" style="color: white; opacity: 100%;"
+                            (click)="removeChosenEmotion($event.target)">cancel</mat-icon>
 
                     </mat-chip>
                 </div>
             </mat-chip-list>
-        </div>
-
-        <div class="gifs">
-            <div *ngIf="shouldShowGifs">
+            <div *ngIf="shouldShowGifs" class="gifs">
                 <cdk-virtual-scroll-viewport itemSize="77" class="scrollContainer">
                     <div class="gifGrid">
                         <img id="gif-{{i}}" *ngFor="let src of gifSources;index as i;" src={{src}} alt="Card image cap"
@@ -46,10 +45,12 @@
         </div>
 
 
+
+
     </div>
 
     <button mat-icon-button (click)="goToIndex(currentCategory.possibleCategroyIndex+1)" id="rightBtn">
-        <mat-icon id="categoryArrow">keyboard_arrow_right</mat-icon>
+        <mat-icon id="categoryArrowRight">keyboard_arrow_right</mat-icon>
     </button>
 
 
@@ -82,11 +83,11 @@
         <div class="addEmotion">
             <input id="andersInput" name="andersInput" class="andersInput" placeholder="Typ hier je emotie in"
                 type="text" (change)="addToAnders($event.target.value)">
-            <button mat-raised-button id="deleteBtn" [disabled]="deleteOtherDisabled" (click)="deleteOtherEmotion()" >emotie wissen</button>
+            <button mat-raised-button id="deleteBtn" [disabled]="deleteOtherDisabled"
+                (click)="deleteOtherEmotion()">emotie wissen</button>
         </div>
         <div class="FlexItems">
-            <mat-chip *ngFor="let a of chipData; index as i" id="{{a.emotionName}}"
-                (click)="selectChip($event.target)">
+            <mat-chip *ngFor="let a of chipData; index as i" id="{{a.emotionName}}" (click)="selectChip($event.target)">
 
 
                 {{a.emotionName}}
