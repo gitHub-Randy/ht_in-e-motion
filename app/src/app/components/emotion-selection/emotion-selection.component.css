@@ -80,12 +80,7 @@ h3 {
   font-size: 22px;
 }
 
-p {
-  margin: auto;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 500;
-}
+
 .selection {
   background-color: #ffffff;
   display: flex;
@@ -109,6 +104,7 @@ p {
   margin: auto;
   margin-bottom: 5%;
   font-family: "Poppins", sans-serif;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -156,7 +152,7 @@ height: 100%  ;
   display: grid;
   justify-content: space-between;
   /* top right bottom left */
-  margin: 10% 10% auto 10%;
+  margin: 19% 7% auto 7%;
 }
 
 .prev {
@@ -171,7 +167,7 @@ height: 100%  ;
   background-color: #ffffff;
 }
 
-.next {
+.next{
   display: grid;
   grid-column-start: 2;
   grid-column-end: 2;
@@ -180,12 +176,25 @@ height: 100%  ;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 13px;
+}
+
+.next p{
+  margin: auto;
 }
 
 .nextButton {
   background-color: #67bcd9;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.20);
+  display: flex;
+  justify-content: center;
+  width: 51px;
+  height: 51px;
 }
-
+::ng-deep .nextButton .mat-button-wrapper{
+  padding: 13px 0 0 4px !important;
+  
+}
 ::ng-deep .mat-chip-list-wrapper {
   flex-wrap: nowrap !important;
 }
