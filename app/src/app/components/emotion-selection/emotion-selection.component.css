@@ -155,6 +155,7 @@ height: 100%  ;
 .bottom-bar {
   display: grid;
   justify-content: space-between;
+  /* top right bottom left */
   margin: 10% 10% auto 10%;
 }
 
@@ -266,14 +267,14 @@ height: 100%  ;
 
 .gridContainer {
   margin: auto;
+  padding-top: 1%;
   width: 100%;
   padding: 2%;
   padding-bottom: 5%;
   display: grid;
   grid-auto-rows:  40px;
   grid-template-columns: repeat( 2, minmax(120px,1fr) );
-  overflow-y: scroll;
-  max-height: 20vh;
+  max-height: 25vh;
 
   /* grid-template-columns: 25% 25% 25% 25%; */
   justify-content: space-evenly;
