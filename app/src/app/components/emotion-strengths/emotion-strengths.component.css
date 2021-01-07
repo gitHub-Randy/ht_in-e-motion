@@ -15,13 +15,14 @@
     font-size: 22px;
     font-weight: bold;
     margin: auto;
+    line-height: 1.2;
 }
 
 .carrousel{
     margin-top: 5%;
     display: flex;
     flex-direction: row;
-    
+    justify-content: center;
 }
 
 #categoryArrow{
@@ -57,6 +58,9 @@
     width: 100%;
     height: auto;
     padding: 5% 5% 5% 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .card h3{
@@ -84,13 +88,23 @@
     border-style: solid;
     border-color: #786238;
     text-align: center;
+    box-shadow: none;
+
+}
+
+::ng-deep .desButton .mat-button-wrapper{
+  padding: 0px 0 0 0px !important;
+  
 }
 
 .swipeControls{
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-  justify-content: center;
+    justify-content: center;
+    height: auto;
+    width: 10px;
+    height: 10px;
   }
 
   #swipeCircle{
@@ -105,21 +119,51 @@
 .bottom-bar{
     display: grid;
     justify-content: space-between;
-    margin: 10% 7% auto 7%;
+    margin: 21% 7% auto 7%;
   }
   
-.prev{
+  .prev{
+    display: flex;
+    flex-direction: column;   
+    font-size: 13px;
+    margin: auto;
+
+  }
+
+  .prev p{
+    margin: auto;
+   }
+
+  .prevButton{
+    background-color: #ffffff;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.20);
+    display: flex;
+    justify-content: center;
+    width: 51px;
+    height: 51px;
+    padding-bottom: 15px;
+  }
+
+::ng-deep .prevButton .mat-button-wrapper{
+  padding: 13px 5px 0 0px !important;
+  
+}
+
+  .next{
     display: grid;
-    grid-column-start: 1;
+    grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-  
-.prevButton{
-    background-color: #ffffff;
-  
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  .next p{
+    margin: auto;
+  }
   
 .next{
     display: grid;
@@ -134,29 +178,50 @@
   
 .nextButton{
     background-color: #F8CB75;
-   
-}
-
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.20);
+    display: flex;
+    justify-content: center;
+    width: 51px;
+    height: 51px;
+  }
+  ::ng-deep .nextButton .mat-button-wrapper{
+    padding: 13px 0 0 4px !important;
+    
+  }
 
 
 
 /* Slider */
+.slider{
+  display: flex;
+  justify-content: center;
+}
 .mat-slider {
-    width: 250px;
+    width: 80%;
+    margin-right: 5%;
 }
 
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-wrapper {
-    top: 18px;
+    top: 15px;
 } 
 
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
-    height: 12px;
-    background: linear-gradient(
+  border-bottom: 10px solid transparent;
+  border-right: 230px solid #F8CB75;
+  border-left: 0px solid transparent;
+  border-top: 10px solid transparent;
+    /* background: linear-gradient(
     to bottom right, 
     transparent 49%,
     #F8CB75 51%
-  );
+  ); */
+  border-radius: 5px;
+  box-sizing:border-box;
+  width: auto;
+  filter: drop-shadow(0px 1px 3px #0000002f);
 } 
+
+
   
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-background,
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
@@ -173,15 +238,16 @@
     width: 20px;
     background-color: #F8CB75;
     border: solid 6px white;
-    bottom: -15px;
+    bottom: -18px;
     right: -20px; 
-    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 1);
+    box-shadow:  0px 3px 6px 0px rgba(0, 0, 0, 0.20);
     transform: none;
 }
 
 ::ng-deep .mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
     background-color:  #F8CB75;
     border: solid 6px white;
+    
   }
   
 ::ng-deep .mat-slider:not(.mat-slider-disabled).cdk-mouse-focused .mat-slider-thumb,
@@ -194,34 +260,44 @@
   
   /*Describe pop-up  */
 ::ng-deep .describe-panel {
-      margin-top: 32% !important;
+      margin-top: 10% !important;
   }
 
 ::ng-deep .describe-panel .mat-dialog-container{
     border-radius: 18px;
-    padding: 24px;
+    padding: 12px 12px 20px 12px;
     overflow-y: hidden;
 }
 
-/* help pop-up */
-::ng-deep .help-panel {
-    margin-top: 32% !important;
-}
-
-::ng-deep .help-panel .mat-dialog-container{
-  border-radius: 18px;
-  padding: 24px;
-  overflow-y: hidden;
-}
-
-/* help pop-up 2*/
+::ng-deep  .backdropBackground4{
+  background-color: rgba(0,0,0,.50);
+} 
+/* help pop-up 2 */
 ::ng-deep .help-panel2 {
-    margin-top: 32% !important;
+    margin-top: 10% !important;
 }
 
 ::ng-deep .help-panel2 .mat-dialog-container{
   border-radius: 18px;
-  padding: 24px 12px;
+  padding: 12px 12px 20px 12px;
   overflow-y: hidden;
 }
 
+::ng-deep  .backdropBackground2{
+  background-color: rgba(0,0,0, 0);
+} 
+
+/* help pop-up 3*/
+::ng-deep .help-panel3 {
+    margin-top: 10% !important;
+}
+
+::ng-deep .help-panel3 .mat-dialog-container{
+  border-radius: 18px;
+  padding: 12px 12px 20px 12px;
+  overflow-y: hidden;
+}
+
+::ng-deep  .backdropBackground3{
+  background-color: rgba(0,0,0,.50);
+} 

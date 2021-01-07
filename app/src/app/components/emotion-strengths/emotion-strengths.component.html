@@ -3,7 +3,7 @@
         <div class='content'>
             <h3>HOE STERK ZIJN DEZE <br> GEVOELENS?</h3>
             <div class="carrousel">
-                <button mat-icon-button (click)="startAnimation('slideRight')" id="leftBtn">
+                <button mat-icon-button (click)="startAnimation('slideRight')" id="leftBtn" [disabled]="chosenEmotions.length <= 1">
                     <mat-icon id="categoryArrow">keyboard_arrow_left</mat-icon>
                 </button> 
                 <div class="card" [@emotionTrigger]="animationState" (@emotionTrigger.done)="resetAnimationState()"
@@ -12,14 +12,15 @@
                     <div class="gif">
                         <img src={{chosenEmotions[currentIndex].gif}}>
                     </div>
+                    
                     <div class="slider">
-                            <mat-slider [(ngModel)]="chosenEmotions[currentIndex].strength" (change)="getValue($event)"t>loading</mat-slider>
+                            <mat-slider id="slider" [(ngModel)]="chosenEmotions[currentIndex].strength" (change)="getValueClick($event)" (pan)="getValue($event)">loading</mat-slider>
                     </div>
                     <div class="describe">
                         <button mat-fab class="desButton" (click)="describe()"><img src="../../../assets/icons/editIcon.png"></button> Beschrijven
                     </div>
                 </div>
-                <button mat-icon-button (click)="startAnimation('slideLeft')" id="rightBtn">
+                <button mat-icon-button (click)="startAnimation('slideLeft')" id="rightBtn" [disabled]="chosenEmotions.length <= 1">
                     <mat-icon id="categoryArrow">keyboard_arrow_right</mat-icon>
                 </button>
             </div>
@@ -27,20 +28,17 @@
                 <mat-icon id="swipeCircle" style="color:#F8CB75; background-color: #F8CB75;" (click)="goToIndex(0)">lens</mat-icon>
                 <ng-container *ngFor="let i of chosenEmotions; index as x">
                     <mat-icon *ngIf="x > 0"  id="swipeCircle" style="color: #FFFFFF; background-color: #FFFFFF;" (click)="goToIndex(x)">lens</mat-icon>
-
                 </ng-container>
-            
-            
-            
           </div>
         </div>
         <div class="bottom-bar">
             <div class="prev">
-                <button mat-fab class="prevButton" (click)="prevpage()"><img src="../../../assets/icons/prev.png"></button> Vorige
+                <button mat-fab class="prevButton" (click)="prevpage()"><img src="../../../assets/icons/prev.png"></button> 
+                <p>Vorige</p>
             </div>
-          
             <div class="next">
-                <button mat-fab class="nextButton" (click)="next()" ><img src="../../../assets/icons/next.png"></button> Volgende
+                <button mat-fab class="nextButton" (click)="next()"><img src="../../../assets/icons/next.png"></button> 
+                <p>Volgende</p>
             </div>
         </div>
     </div>

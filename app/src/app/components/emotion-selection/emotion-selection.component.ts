@@ -51,7 +51,14 @@ import {HelpPopUp3Component} from './help-pop-up3/help-pop-up3.component'
 
 export class EmotionSelectionComponent implements OnInit,AfterViewInit {
 
-  constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef, private router: Router, private andersService: AndersService,private help: MatDialog) { }
+  constructor(private gifService: GifServiceService, private ref: ChangeDetectorRef, private router: Router, private andersService: AndersService,private help: MatDialog) {
+    if (this.chosenEmotions.length != 0){
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation.extras.state as {chosenEmotions: choosenEmotions[]};
+    this.chosenEmotions = state.chosenEmotions;
+    console.log(this.chosenEmotions);
+    }
+   }
 
   //#region  variables
   currentCategory: category;
@@ -104,6 +111,8 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
       maxWidth: '85vw',
       height: '390px',
       width: '600px',
+      disableClose: true,
+      backdropClass: 'backdropBackground',
       panelClass: 'help-panel'
     })
   }
@@ -464,7 +473,7 @@ export class EmotionSelectionComponent implements OnInit,AfterViewInit {
         emotionName: this.currentChip.emotionName,
         gif: gifURL,
         index: parseInt(gifImageElement.id.charAt(4)),
-        strength: 0,
+        strength: 100,
         description: ""
       })
     }
