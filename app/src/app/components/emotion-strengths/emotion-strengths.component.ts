@@ -89,6 +89,9 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     }
     this.changeSwipeControlColorToYellow()
     this.startAnimation("slideRight")
+    let slider = document.getElementsByClassName('mat-slider-track-wrapper')[0] as HTMLElement;
+    console.log(this.chosenEmotions[this.currentIndex])
+     slider.style.borderRight = `${this.chosenEmotions[this.currentIndex].strength * 230 / 100}px solid #f8ca75`;
 
   }
 
@@ -103,6 +106,9 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     }
     this.changeSwipeControlColorToYellow()
     this.startAnimation("slideLeft")
+    let slider = document.getElementsByClassName('mat-slider-track-wrapper')[0] as HTMLElement;
+    console.log(this.chosenEmotions[this.currentIndex])
+     slider.style.borderRight = `${this.chosenEmotions[this.currentIndex].strength * 230 / 100}px solid #f8ca75`;
     
   }
 
@@ -261,6 +267,8 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     this.currentIndex = indexNew;
     
     this.changeSwipeControlColorToYellow();
+ 
+   
   }
 
   getValue(event) {

@@ -387,7 +387,7 @@ export class EmotionSelectionComponent implements OnInit, AfterViewInit {
         gif: gifElement.src,
         index: parseInt(gifElement.id.charAt(4)),
         description: "",
-        strength: 0
+        strength: 100
 
       })
     }
