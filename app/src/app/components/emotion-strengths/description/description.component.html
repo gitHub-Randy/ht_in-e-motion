@@ -15,8 +15,11 @@
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="12"
             cdkAutosizeMaxRows="12"
-            maxlength="260"> 
+            maxlength="{{charLimit}}"> 
             {{description}}</textarea>
+            <div *ngIf="description.length" class="count-div">
+               {{charLimit - description.length}}
+            </div>
 </mat-form-field>
 <div class="ok">
     <button class="okButton" (click)="ok()">OK</button>

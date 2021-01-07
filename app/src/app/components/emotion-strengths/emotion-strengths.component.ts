@@ -64,17 +64,20 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   ngAfterViewInit(): void {
     this.setT();
     if(localStorage.getItem("checkedStrengthDialog2") == "false" || localStorage.getItem("checkedStrengthDialog2") == null) {
-      this.showHelp2();
+      this.showHelp3();
     }
     if(localStorage.getItem("checkedStrengthDialog") == "false" || localStorage.getItem("checkedStrengthDialog") == null) {
-      this.showHelp();
+      this.showHelp2();
     }
-
+    this.showLeftButton();
+    this.showRightButton();
+    this.showSwipeControls();
   }
 
   ngOnInit(): void {
     this.setbg();
     this.setT();
+
   }
 
   onLeft(){
@@ -100,6 +103,7 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     }
     this.changeSwipeControlColorToYellow()
     this.startAnimation("slideLeft")
+    
   }
 
 
@@ -108,6 +112,8 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
       maxWidth: '85vw',
       height: '390px',
       width: '600px',
+      disableClose: true,
+      backdropClass: 'backdropBackground4',
       panelClass: 'describe-panel',
       data: {
         emotion: this.chosenEmotions[this.currentIndex]
@@ -122,21 +128,25 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
     
   }
 
-  showHelp(){
+  showHelp2(){
     this.help.open(HelpPopUpComponent, {
       maxWidth: '85vw',
       height: '390px',
       width: '600px',
-      panelClass: 'help-panel'
+      disableClose: true,
+      backdropClass: 'backdropBackground2',
+      panelClass: 'help-panel2'
     })
   }
 
-  showHelp2(){
+  showHelp3(){
     this.help2.open(HelpPopUp2Component, {
       maxWidth: '85vw',
       height: '390px',
       width: '600px',
-      panelClass: 'help-panel2'
+      disableClose: true,
+      backdropClass: 'backdropBackground3',
+      panelClass: 'help-panel3'
     })
   }
 
@@ -147,17 +157,46 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   }
   
   setT(){
-    this.childComponent.setTitle("Jouw gevoelens voor vandaag");
+    this.childComponent.setTitle("Jouw gevoelens van vandaag");
     let t = document.getElementById('center');
     t.style.marginTop = "10%";
   }
 
   prevpage(){
-    this.router.navigateByUrl('emotions');
+    this.router.navigate(['emotions'], { state: { chosenEmotions: this.chosenEmotions } });
   }
 
   next(){
     this.saveEmotions();
+  }
+
+  showLeftButton(){
+    let leftBtn = document.getElementById("leftBtn");
+    if (this.chosenEmotions.length <= 1){
+      leftBtn.style.backgroundColor = "transparent";
+      leftBtn.removeChild(leftBtn.childNodes[0]);
+    } else{
+      leftBtn.style.display = "block"
+    }
+  }
+
+  showRightButton(){
+    let rightBtn = document.getElementById("rightBtn");
+    if (this.chosenEmotions.length <= 1){
+      rightBtn.style.backgroundColor = "transparent";
+      rightBtn.removeChild(rightBtn.childNodes[0]);
+    } else{
+      rightBtn.style.display = "block"
+    }
+  }
+
+  showSwipeControls(){
+    let swipeBtn = document.getElementById("swipeCircle");
+    if (this.chosenEmotions.length <= 1){
+      swipeBtn.style.display = "none";
+    } else{
+      swipeBtn.style.display = "block"
+    }
   }
 
   changeSwipeControlColorToYellow() {
@@ -178,14 +217,14 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
 
   startAnimation(state) {
     console.log(state);
-    if (!this.animationState) {
-      this.animationState = state
+    if(this.chosenEmotions.length > 1){
+      if (!this.animationState) {
+        this.animationState = state
+      }
     }
-
   }
 
   resetAnimationState() {
-    console.log(this.animationState)
     if (this.animationState == "slideRight" && !this.shouldChange) {
        this.onLeft();
     } 
@@ -193,7 +232,6 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
       
        this.onRight();
     }
-    console.log("reset")
     this.animationState = '';
     this.shouldChange = false;
   }
@@ -226,8 +264,21 @@ export class EmotionStrengthsComponent implements OnInit, AfterViewInit{
   }
 
   getValue(event) {
+    let test = document.getElementsByClassName("mat-slider")[0] as HTMLElement;
+    let value = parseInt(test.getAttribute("aria-valuenow"));
+    
+    //console.log(test.getAttribute("aria-valuenow"));
+    this.chosenEmotions[this.currentIndex].strength = value;
+    //console.log(this.chosenEmotions[this.currentIndex].strength);
+    let slider = document.getElementsByClassName('mat-slider-track-wrapper')[0] as HTMLElement;
+    slider.style.borderRight = `${value * 230 / 100}px solid #f8ca75`;
+    }
+
+  getValueClick(event) {
     this.chosenEmotions[this.currentIndex].strength = event.value;
     console.log(this.chosenEmotions[this.currentIndex].strength);
+    let slider = document.getElementsByClassName('mat-slider-track-wrapper')[0] as HTMLElement;
+    slider.style.borderRight = `${parseInt(event.value) * 230 / 100}px solid #f8ca75`
   }
 
   saveEmotions() {  

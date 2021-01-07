@@ -10,6 +10,7 @@ import { choosenEmotions } from 'src/app/interfaces/chosenEmotions';
 export class DescriptionComponent implements OnInit {
   
   description: string;
+  charLimit = 300;
 
   constructor( public dialogRef: MatDialogRef<DescriptionComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
